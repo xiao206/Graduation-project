@@ -75,6 +75,32 @@ const PENDING_EDIT_KEY = "gp:pendingEditTxnId"
 
 const txn = computed(() => (id.value ? store.getTxnById(id.value) : undefined))
 
+function parseIdFromLocation() {
+  try {
+    if (typeof location === "undefined") return ""
+    const u = new URL(location.href)
+    const fromSearch = u.searchParams.get("id") || ""
+    if (fromSearch) return fromSearch
+    const h = u.hash || ""
+    const qi = h.indexOf("?")
+    if (qi < 0) return ""
+    const qs = h.slice(qi + 1)
+    return new URLSearchParams(qs).get("id") || ""
+  } catch {
+    return ""
+  }
+}
+
+function normalizeId(raw: unknown) {
+  const s = String(raw || "")
+  if (!s) return ""
+  try {
+    return decodeURIComponent(s)
+  } catch {
+    return s
+  }
+}
+
 const category = computed(() => {
   const t = txn.value
   if (!t) return undefined
@@ -149,7 +175,7 @@ function copyId() {
 }
 
 onLoad((q: any) => {
-  id.value = String(q?.id || "")
+  id.value = normalizeId(q?.id || parseIdFromLocation())
 })
 </script>
 
