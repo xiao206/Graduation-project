@@ -70,27 +70,28 @@ refreshExport()
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 18rpx 24rpx 24rpx;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 28rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   margin-bottom: 14rpx;
 }
 
 .title {
   font-size: 30rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sub {
   font-size: 24rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .actions {
@@ -100,22 +101,22 @@ refreshExport()
 }
 
 .primary {
-  background: #111827;
+  background: var(--primary);
   color: #ffffff;
-  border-radius: 16rpx;
+  border-radius: var(--radius);
 }
 
 .ghost {
-  background: rgba(255, 255, 255, 0.92);
-  color: #0f172a;
-  border-radius: 16rpx;
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: var(--card);
+  color: var(--text);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .danger {
   background: rgba(239, 68, 68, 0.12);
   color: #ef4444;
-  border-radius: 16rpx;
+  border-radius: var(--radius);
   border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
@@ -124,10 +125,11 @@ refreshExport()
   width: 100%;
   min-height: 200rpx;
   padding: 14rpx 16rpx;
-  background: rgba(15, 23, 42, 0.03);
-  border-radius: 18rpx;
+  background: var(--primary-ghost);
+  border-radius: var(--radius);
   font-size: 22rpx;
-  color: #0f172a;
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .ph {

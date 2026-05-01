@@ -40,15 +40,16 @@ function goFeedback() {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 24rpx;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 24rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .head {
@@ -61,8 +62,8 @@ function goFeedback() {
 .logo {
   width: 76rpx;
   height: 76rpx;
-  border-radius: 22rpx;
-  background: rgba(15, 23, 42, 0.04);
+  border-radius: var(--radius-lg);
+  background: var(--primary-ghost);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,13 +77,13 @@ function goFeedback() {
 .name {
   font-size: 32rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sub {
   margin-top: 8rpx;
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .rows {
@@ -108,21 +109,20 @@ function goFeedback() {
 .k {
   font-size: 26rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .v {
   font-size: 24rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .ghost {
   margin-top: 8rpx;
   height: 76rpx;
-  border-radius: 18rpx;
-  background: rgba(15, 23, 42, 0.05);
-  color: #0f172a;
+  border-radius: var(--radius);
+  background: var(--primary-ghost);
+  color: var(--text);
   font-weight: 800;
 }
 </style>
-

@@ -151,7 +151,7 @@ function onPickMonth(e: any) {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 18rpx 24rpx 24rpx;
 }
 
@@ -167,20 +167,20 @@ function onPickMonth(e: any) {
   align-items: baseline;
   gap: 10rpx;
   padding: 12rpx 16rpx;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18rpx;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .pill-text {
   font-size: 26rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .pill-sub {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .summary {
@@ -191,10 +191,10 @@ function onPickMonth(e: any) {
 
 .sum-item {
   flex: 1;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 20rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 16rpx;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.05);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 8rpx;
@@ -202,13 +202,13 @@ function onPickMonth(e: any) {
 
 .label {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .value {
   font-size: 30rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .expense {
@@ -220,10 +220,11 @@ function onPickMonth(e: any) {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 28rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   margin-bottom: 14rpx;
 }
 
@@ -237,12 +238,12 @@ function onPickMonth(e: any) {
 .title {
   font-size: 30rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sub {
   font-size: 24rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .empty {
@@ -251,7 +252,7 @@ function onPickMonth(e: any) {
 
 .empty-text {
   font-size: 24rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .chart-row {

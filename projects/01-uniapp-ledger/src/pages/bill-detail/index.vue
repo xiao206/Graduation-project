@@ -99,15 +99,16 @@ onLoad((q: any) => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 24rpx;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 20rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .top {
@@ -138,19 +139,20 @@ onLoad((q: any) => {
 .name {
   font-size: 30rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sub {
   font-size: 24rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .amount-row {
   margin-top: 20rpx;
   padding: 18rpx 18rpx;
-  background: rgba(15, 23, 42, 0.03);
-  border-radius: 18rpx;
+  background: var(--primary-ghost);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .amount {
@@ -169,21 +171,22 @@ onLoad((q: any) => {
 .note {
   margin-top: 16rpx;
   padding: 16rpx 18rpx;
-  background: rgba(15, 23, 42, 0.03);
-  border-radius: 18rpx;
+  background: var(--primary-ghost);
+  border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   gap: 8rpx;
+  border: 1px solid var(--border);
 }
 
 .note-label {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .note-text {
   font-size: 26rpx;
-  color: #0f172a;
+  color: var(--text);
   font-weight: 700;
 }
 
@@ -195,39 +198,40 @@ onLoad((q: any) => {
 
 .ghost {
   flex: 1;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18rpx;
-  color: #0f172a;
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: var(--card);
+  border-radius: var(--radius);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .danger {
   flex: 1;
   background: rgba(239, 68, 68, 0.12);
-  border-radius: 18rpx;
+  border-radius: var(--radius);
   color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
 .empty {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 28rpx;
   display: flex;
   flex-direction: column;
   gap: 16rpx;
   align-items: flex-start;
+  border: 1px solid var(--border);
 }
 
 .empty-title {
   font-size: 30rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .primary {
-  background: #111827;
+  background: var(--primary);
   color: #ffffff;
-  border-radius: 18rpx;
+  border-radius: var(--radius);
 }
 </style>

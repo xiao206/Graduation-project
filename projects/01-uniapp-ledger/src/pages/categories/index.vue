@@ -88,24 +88,25 @@ function onSwitch(id: string, e: any) {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 18rpx 24rpx 24rpx;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 28rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   margin-bottom: 14rpx;
 }
 
 .type-toggle {
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--card);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border);
   margin-bottom: 14rpx;
 }
 
@@ -121,7 +122,7 @@ function onSwitch(id: string, e: any) {
 .seg-text {
   font-size: 28rpx;
   font-weight: 800;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .active-exp {
@@ -143,7 +144,7 @@ function onSwitch(id: string, e: any) {
 .title {
   font-size: 30rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .form {
@@ -156,10 +157,11 @@ function onSwitch(id: string, e: any) {
 .input {
   height: 76rpx;
   padding: 0 16rpx;
-  background: rgba(15, 23, 42, 0.03);
-  border-radius: 18rpx;
+  background: var(--primary-ghost);
+  border-radius: var(--radius);
   font-size: 26rpx;
-  color: #0f172a;
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .ph {
@@ -185,9 +187,9 @@ function onSwitch(id: string, e: any) {
 }
 
 .primary {
-  background: #111827;
+  background: var(--primary);
   color: #ffffff;
-  border-radius: 16rpx;
+  border-radius: var(--radius);
 }
 
 .list {
@@ -236,11 +238,11 @@ function onSwitch(id: string, e: any) {
 .row-name {
   font-size: 28rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .row-sub {
   font-size: 20rpx;
-  color: #94a3b8;
+  color: var(--muted);
 }
 </style>

@@ -84,22 +84,23 @@ function onSwitch(id: string, e: any) {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 18rpx 24rpx 24rpx;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 28rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   margin-bottom: 14rpx;
 }
 
 .title {
   font-size: 30rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .form {
@@ -112,10 +113,11 @@ function onSwitch(id: string, e: any) {
 .input {
   height: 76rpx;
   padding: 0 16rpx;
-  background: rgba(15, 23, 42, 0.03);
-  border-radius: 18rpx;
+  background: var(--primary-ghost);
+  border-radius: var(--radius);
   font-size: 26rpx;
-  color: #0f172a;
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .ph {
@@ -125,22 +127,23 @@ function onSwitch(id: string, e: any) {
 .picker {
   height: 76rpx;
   padding: 0 16rpx;
-  background: rgba(15, 23, 42, 0.03);
-  border-radius: 18rpx;
+  background: var(--primary-ghost);
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
+  border: 1px solid var(--border);
 }
 
 .picker-text {
   font-size: 26rpx;
-  color: #0f172a;
+  color: var(--text);
   font-weight: 800;
 }
 
 .primary {
-  background: #111827;
+  background: var(--primary);
   color: #ffffff;
-  border-radius: 16rpx;
+  border-radius: var(--radius);
 }
 
 .list {
@@ -170,11 +173,11 @@ function onSwitch(id: string, e: any) {
 .row-name {
   font-size: 28rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .row-sub {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 </style>

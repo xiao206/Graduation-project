@@ -141,7 +141,7 @@ function goAssets() {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
 }
 
 .header {
@@ -161,20 +161,20 @@ function goAssets() {
   align-items: baseline;
   gap: 10rpx;
   padding: 12rpx 16rpx;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 18rpx;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .month-text {
   font-size: 30rpx;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .month-sub {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .header-actions {
@@ -183,17 +183,18 @@ function goAssets() {
 }
 
 .ghost-btn {
-  background: rgba(255, 255, 255, 0.9);
-  color: #0f172a;
-  border-radius: 16rpx;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: var(--card);
+  color: var(--text);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .summary-card {
-  background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.92));
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 18rpx 18rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .summary-top,
@@ -215,13 +216,13 @@ function goAssets() {
 
 .label {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .value {
   font-size: 34rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .expense {
@@ -246,7 +247,7 @@ function goAssets() {
 .section-title {
   font-size: 28rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .link-btn {
@@ -255,31 +256,33 @@ function goAssets() {
 }
 
 .empty {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 28rpx;
   display: flex;
   flex-direction: column;
   gap: 18rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .empty-text {
-  color: #334155;
+  color: var(--muted);
   font-size: 26rpx;
 }
 
 .primary-btn {
-  background: #111827;
+  background: var(--primary);
   color: #ffffff;
-  border-radius: 18rpx;
+  border-radius: var(--radius);
 }
 
 .list {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .txn {

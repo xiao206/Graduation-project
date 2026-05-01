@@ -111,7 +111,7 @@ function goAdd() {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
 }
 
 .toolbar {
@@ -126,31 +126,31 @@ function goAdd() {
   align-items: baseline;
   gap: 10rpx;
   padding: 12rpx 16rpx;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18rpx;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.06);
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .pill-text {
   font-size: 26rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .pill-sub {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .search {
   flex: 1;
   height: 72rpx;
   padding: 0 16rpx;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18rpx;
+  background: var(--card);
+  border-radius: var(--radius);
   font-size: 26rpx;
-  color: #0f172a;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.06);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .ph {
@@ -176,19 +176,20 @@ function goAdd() {
 .group-date {
   font-size: 26rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .group-sum {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .list {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .item {
@@ -231,12 +232,12 @@ function goAdd() {
 .name {
   font-size: 28rpx;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sub {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .amt {
@@ -255,29 +256,30 @@ function goAdd() {
 .empty {
   margin: 24rpx;
   padding: 28rpx;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   gap: 14rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .empty-title {
   font-size: 30rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .empty-sub {
   font-size: 24rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .primary {
   margin-top: 6rpx;
-  background: #111827;
+  background: var(--primary);
   color: #ffffff;
-  border-radius: 18rpx;
+  border-radius: var(--radius);
 }
 </style>

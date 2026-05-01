@@ -89,21 +89,22 @@ function go(url: string) {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 24rpx;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 24rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .title {
   font-size: 30rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
   margin-bottom: 14rpx;
 }
 
@@ -133,8 +134,8 @@ function go(url: string) {
 .row-icon {
   width: 64rpx;
   height: 64rpx;
-  border-radius: 18rpx;
-  background: rgba(15, 23, 42, 0.04);
+  border-radius: var(--radius);
+  background: var(--primary-ghost);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,13 +149,13 @@ function go(url: string) {
 .row-text {
   font-size: 28rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .row-sub {
   display: block;
   margin-top: 6rpx;
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 </style>

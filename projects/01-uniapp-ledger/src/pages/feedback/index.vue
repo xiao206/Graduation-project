@@ -26,28 +26,29 @@ function copy() {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding: 24rpx;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 24rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .title {
   font-size: 30rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .tip {
   display: block;
   margin-top: 10rpx;
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .textarea {
@@ -55,19 +56,19 @@ function copy() {
   width: 100%;
   height: 280rpx;
   padding: 18rpx 18rpx;
-  border-radius: 18rpx;
-  background: rgba(15, 23, 42, 0.04);
+  border-radius: var(--radius);
+  background: var(--primary-ghost);
   font-size: 26rpx;
-  box-sizing: border-box;
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .primary {
   margin-top: 16rpx;
   height: 76rpx;
-  border-radius: 18rpx;
-  background: #0f172a;
+  border-radius: var(--radius);
+  background: var(--primary);
   color: #ffffff;
   font-weight: 900;
 }
 </style>
-

@@ -231,7 +231,7 @@ onShow(() => {
 <style scoped>
 .page {
   min-height: 100vh;
-  background: #f6f7fb;
+  background: var(--bg);
   padding-bottom: 24rpx;
 }
 
@@ -240,11 +240,11 @@ onShow(() => {
 }
 
 .type-toggle {
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--card);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border);
 }
 
 .seg {
@@ -259,7 +259,7 @@ onShow(() => {
 .seg-text {
   font-size: 28rpx;
   font-weight: 800;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .active-exp {
@@ -280,15 +280,16 @@ onShow(() => {
 
 .amount-card {
   margin-top: 14rpx;
-  background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.92));
-  border-radius: 22rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   padding: 18rpx;
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .amount-label {
   font-size: 22rpx;
-  color: #64748b;
+  color: var(--muted);
 }
 
 .amount-row {
@@ -301,13 +302,13 @@ onShow(() => {
 .currency {
   font-size: 28rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .amount {
   font-size: 54rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .meta-row {
@@ -319,12 +320,12 @@ onShow(() => {
 .meta-pill {
   padding: 10rpx 14rpx;
   border-radius: 16rpx;
-  background: rgba(15, 23, 42, 0.04);
+  background: var(--primary-ghost);
 }
 
 .meta-text {
   font-size: 24rpx;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .section {
@@ -334,7 +335,7 @@ onShow(() => {
 .section-title {
   font-size: 26rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .cat-grid {
@@ -345,20 +346,19 @@ onShow(() => {
 }
 
 .cat {
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--card);
   border-radius: 20rpx;
   padding: 14rpx 10rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8rpx;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.05);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid var(--border);
 }
 
 .cat-active {
-  border-color: rgba(17, 24, 39, 0.45);
-  box-shadow: 0 18rpx 44rpx rgba(15, 23, 42, 0.12);
+  border-color: rgba(17, 24, 39, 0.5);
+  box-shadow: var(--shadow);
 }
 
 .cat-icon {
@@ -376,7 +376,7 @@ onShow(() => {
 
 .cat-name {
   font-size: 22rpx;
-  color: #0f172a;
+  color: var(--text);
   font-weight: 700;
 }
 
@@ -384,11 +384,11 @@ onShow(() => {
   margin-top: 12rpx;
   height: 76rpx;
   padding: 0 16rpx;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18rpx;
+  background: var(--card);
+  border-radius: var(--radius);
   font-size: 26rpx;
-  color: #0f172a;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.05);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .ph {
@@ -407,31 +407,30 @@ onShow(() => {
 
 .key {
   height: 86rpx;
-  border-radius: 18rpx;
-  background: rgba(255, 255, 255, 0.92);
+  border-radius: var(--radius);
+  background: var(--card);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.05);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid var(--border);
 }
 
 .key-fn {
-  background: rgba(15, 23, 42, 0.04);
+  background: var(--primary-ghost);
 }
 
 .key-ok {
   grid-column: span 4;
   height: 94rpx;
-  background: #111827;
+  background: var(--primary);
   border: none;
-  box-shadow: 0 22rpx 60rpx rgba(17, 24, 39, 0.25);
+  box-shadow: var(--shadow);
 }
 
 .key-text {
   font-size: 30rpx;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .key-ok .key-text {
@@ -446,16 +445,16 @@ onShow(() => {
 
 .ghost {
   flex: 1;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 18rpx;
-  color: #0f172a;
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: var(--card);
+  border-radius: var(--radius);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .primary {
   flex: 1;
-  background: #111827;
+  background: var(--primary);
   color: #ffffff;
-  border-radius: 18rpx;
+  border-radius: var(--radius);
 }
 </style>
