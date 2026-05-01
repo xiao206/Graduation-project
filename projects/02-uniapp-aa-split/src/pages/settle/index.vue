@@ -46,6 +46,38 @@
       </button>
     </view>
 
+    <view v-if="mode === 'month'" class="card">
+      <text class="title">本月快览</text>
+      <view class="mini-grid">
+        <view class="mini">
+          <text class="mini-k">账单数</text>
+          <text class="mini-v">{{ monthBills.length }}</text>
+        </view>
+        <view class="mini">
+          <text class="mini-k">总金额</text>
+          <text class="mini-v">¥{{ formatCents(monthTotal) }}</text>
+        </view>
+        <view class="mini">
+          <text class="mini-k">启用成员</text>
+          <text class="mini-v">{{ enabledCount }}</text>
+        </view>
+      </view>
+      <view class="mini-actions">
+        <button class="ghost" @click="goBills">
+          <view class="btn-inner-sm">
+            <uni-icons type="list" size="18" color="var(--text)" />
+            <text>看账单</text>
+          </view>
+        </button>
+        <button class="primary" @click="goAdd">
+          <view class="btn-inner">
+            <uni-icons type="plus" size="20" color="#ffffff" />
+            <text>新增账单</text>
+          </view>
+        </button>
+      </view>
+    </view>
+
     <view class="card">
       <text class="title">说明</text>
       <text class="sub">平均分摊：每笔账单按参与人数平均分摊到每人（以分为单位处理余数）。</text>
@@ -55,14 +87,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { toMonthKey } from "@/utils/date"
+import { useAASplitStore } from "@/store/useAASplitStore"
+import { formatCents } from "@/utils/money"
 
 const mode = ref<"month" | "custom">("month")
 const monthKey = ref(toMonthKey(new Date()))
 
 const startDate = ref(new Date().toISOString().slice(0, 10))
 const endDate = ref(new Date().toISOString().slice(0, 10))
+
+const store = useAASplitStore()
+const monthBills = computed(() => store.listBillsByMonth(monthKey.value))
+const monthTotal = computed(() => monthBills.value.reduce((s, b) => s + b.amountCents, 0))
+const enabledCount = computed(() => store.membersEnabled.value.length || 1)
 
 function onPickMonth(e: any) {
   const v = String(e?.detail?.value || "")
@@ -100,13 +139,21 @@ function goDetail() {
   const endISO = mode.value === "month" ? toEndISOByMonth(monthKey.value) : toEndISOByDate(endDate.value)
   uni.navigateTo({ url: `/pages/settle-detail/index?start=${encodeURIComponent(startISO)}&end=${encodeURIComponent(endISO)}` })
 }
+
+function goBills() {
+  uni.switchTab({ url: "/pages/bills/index" })
+}
+
+function goAdd() {
+  uni.navigateTo({ url: "/pages/bill-edit/index" })
+}
 </script>
 
 <style scoped>
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding: 18rpx 24rpx 24rpx;
+  padding: 18rpx 24rpx calc(24rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .card {
@@ -201,6 +248,61 @@ function goDetail() {
 }
 
 .btn-inner {
+  height: 90rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  font-size: 30rpx;
+}
+
+.mini-grid {
+  margin-top: 14rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12rpx;
+}
+
+.mini {
+  background: var(--surface);
+  border-radius: 18rpx;
+  border: 1px solid var(--border);
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.mini-k {
+  font-size: 22rpx;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.mini-v {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.mini-actions {
+  margin-top: 14rpx;
+  display: flex;
+  gap: 12rpx;
+}
+
+.ghost {
+  flex: 1;
+  height: 90rpx;
+  border-radius: 999rpx;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-weight: 900;
+}
+
+.btn-inner-sm {
   height: 90rpx;
   border-radius: 999rpx;
   display: flex;

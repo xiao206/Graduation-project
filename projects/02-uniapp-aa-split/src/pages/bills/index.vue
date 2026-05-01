@@ -36,6 +36,33 @@
       <button class="primary" @click="goAdd">新增账单</button>
     </view>
 
+    <view v-if="groups.length === 0" class="empty-fill">
+      <view class="empty-fill-head">
+        <text class="empty-fill-title">下一步做什么</text>
+        <text class="empty-fill-sub">先把基础信息补齐会更顺</text>
+      </view>
+      <view class="empty-fill-actions">
+        <button class="ghost" @click="goMembers">
+          <view class="btn-inner">
+            <uni-icons type="person-filled" size="18" color="var(--text)" />
+            <text>成员</text>
+          </view>
+        </button>
+        <button class="ghost" @click="goSettle">
+          <view class="btn-inner">
+            <uni-icons type="bars" size="18" color="var(--text)" />
+            <text>结算</text>
+          </view>
+        </button>
+        <button class="primary" @click="goAdd">
+          <view class="btn-inner">
+            <uni-icons type="plus" size="18" color="#ffffff" />
+            <text>新增</text>
+          </view>
+        </button>
+      </view>
+    </view>
+
     <scroll-view v-else scroll-y class="scroll">
       <view v-for="g in groups" :key="g.date" class="group">
         <view class="group-head">
@@ -55,7 +82,11 @@
           </view>
         </view>
       </view>
-      <view style="height: 60rpx" />
+      <view class="tail">
+        <text class="tail-title">筛选共 {{ filteredCount }} 笔</text>
+        <text class="tail-sub">继续记账，结算会更准确</text>
+        <button class="tail-btn" @click="goAdd">新增账单</button>
+      </view>
     </scroll-view>
   </view>
 </template>
@@ -124,12 +155,23 @@ function goDetail(id: string) {
 function goAdd() {
   uni.navigateTo({ url: "/pages/bill-edit/index" })
 }
+
+function goMembers() {
+  uni.navigateTo({ url: "/pages/members/index" })
+}
+
+function goSettle() {
+  uni.switchTab({ url: "/pages/settle/index" })
+}
 </script>
 
 <style scoped>
 .page {
   min-height: 100vh;
   background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(18rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .toolbar {
@@ -197,7 +239,9 @@ function goAdd() {
 }
 
 .scroll {
-  height: calc(100vh - 190rpx);
+  flex: 1;
+  min-height: 0;
+  padding-bottom: calc(18rpx + var(--safe-bottom));
 }
 
 .summary {
@@ -215,6 +259,99 @@ function goAdd() {
   display: flex;
   flex-direction: column;
   gap: 10rpx;
+}
+
+.empty-fill {
+  margin: 0 24rpx 14rpx;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.empty-fill-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.empty-fill-title {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.empty-fill-sub {
+  font-size: 22rpx;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.empty-fill-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12rpx;
+}
+
+.tail {
+  margin: 8rpx 24rpx 0;
+  background: rgba(17, 24, 39, 0.03);
+  border: 1px dashed rgba(17, 24, 39, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 22rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  align-items: flex-start;
+}
+
+.tail-title {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.tail-sub {
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.tail-btn {
+  margin-top: 4rpx;
+  height: 76rpx;
+  padding: 0 26rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.ghost {
+  height: 76rpx;
+  border-radius: 999rpx;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-weight: 900;
+}
+
+.btn-inner {
+  height: 76rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+}
+
+.empty-fill-actions .primary {
+  margin-top: 0;
+  height: 76rpx;
+  border-radius: 999rpx;
 }
 
 .summary-k {

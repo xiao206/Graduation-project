@@ -21,6 +21,8 @@ page {
   --surface: #f8fafc;
   --chip: rgba(17, 24, 39, 0.06);
   --focus: rgba(37, 99, 235, 0.22);
+  --tabbar: 120rpx;
+  --safe-bottom: env(safe-area-inset-bottom);
 
   background: var(--bg);
   color: var(--text);

@@ -67,6 +67,41 @@
         <button class="btn-primary wide" @click="goAdd">新增账单</button>
       </view>
 
+      <view v-if="recentBills.length === 0" class="guide">
+        <view class="guide-head">
+          <text class="guide-title">怎么开始</text>
+          <text class="guide-sub">3 步完成一次 AA</text>
+        </view>
+        <view class="guide-steps">
+          <view class="step">
+            <view class="step-dot" />
+            <text class="step-text">先在设置里确认成员与分类</text>
+          </view>
+          <view class="step">
+            <view class="step-dot" />
+            <text class="step-text">新增账单，选择付款人和参与人</text>
+          </view>
+          <view class="step">
+            <view class="step-dot" />
+            <text class="step-text">去结算页生成分享文本，发群里即可</text>
+          </view>
+        </view>
+        <view class="guide-actions">
+          <button class="btn-ghost" @click="goSettings">
+            <view class="btn-inner">
+              <uni-icons type="gear-filled" size="18" color="var(--primary)" />
+              <text>去设置</text>
+            </view>
+          </button>
+          <button class="btn-primary" @click="goAdd">
+            <view class="btn-inner">
+              <uni-icons type="plus" size="18" color="#ffffff" />
+              <text>新增账单</text>
+            </view>
+          </button>
+        </view>
+      </view>
+
       <view v-else class="list">
         <view v-for="b in recentBills" :key="b.id" class="cell" @click="goDetail(b.id)">
           <view class="dot" :style="{ backgroundColor: categoryMap.get(b.categoryId)?.color || '#D1D5DB' }" />
@@ -138,6 +173,10 @@ function goMembers() {
   uni.navigateTo({ url: "/pages/members/index" })
 }
 
+function goSettings() {
+  uni.switchTab({ url: "/pages/settings/index" })
+}
+
 function goDetail(id: string) {
   uni.navigateTo({ url: `/pages/bill-detail/index?id=${encodeURIComponent(id)}` })
 }
@@ -147,6 +186,7 @@ function goDetail(id: string) {
 .page {
   min-height: 100vh;
   background: var(--bg);
+  padding-bottom: calc(24rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .top {
@@ -315,6 +355,68 @@ function goDetail(id: string) {
   font-size: 24rpx;
   color: var(--muted);
   margin-bottom: 16rpx;
+}
+
+.guide {
+  margin-top: 12rpx;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.guide-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.guide-title {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.guide-sub {
+  font-size: 22rpx;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.guide-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.step-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  box-shadow: 0 8rpx 18rpx rgba(37, 99, 235, 0.22);
+}
+
+.step-text {
+  font-size: 24rpx;
+  color: rgba(17, 24, 39, 0.85);
+  font-weight: 800;
+}
+
+.guide-actions {
+  margin-top: 4rpx;
+  display: flex;
+  gap: 12rpx;
 }
 
 .list {
