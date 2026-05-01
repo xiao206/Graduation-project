@@ -2,7 +2,7 @@
 
 ## 项目清单
 
-- （在这里维护项目索引：名称｜说明｜技术栈｜路径｜演示/截图）
+- 01｜记账小程序｜UniApp(Vue3)+TS｜[projects/01-uniapp-ledger](file:///workspace/projects/01-uniapp-ledger/README.md)
 
 ## 命名建议
 

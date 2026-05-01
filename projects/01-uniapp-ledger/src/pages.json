@@ -1,0 +1,98 @@
+{
+  "pages": [
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "记账"
+      }
+    },
+    {
+      "path": "pages/bills/index",
+      "style": {
+        "navigationBarTitleText": "账单"
+      }
+    },
+    {
+      "path": "pages/add/index",
+      "style": {
+        "navigationBarTitleText": "记一笔"
+      }
+    },
+    {
+      "path": "pages/stats/index",
+      "style": {
+        "navigationBarTitleText": "统计"
+      }
+    },
+    {
+      "path": "pages/settings/index",
+      "style": {
+        "navigationBarTitleText": "设置"
+      }
+    },
+    {
+      "path": "pages/bill-detail/index",
+      "style": {
+        "navigationBarTitleText": "账单详情"
+      }
+    },
+    {
+      "path": "pages/assets/index",
+      "style": {
+        "navigationBarTitleText": "预算与资产"
+      }
+    },
+    {
+      "path": "pages/categories/index",
+      "style": {
+        "navigationBarTitleText": "分类管理"
+      }
+    },
+    {
+      "path": "pages/accounts/index",
+      "style": {
+        "navigationBarTitleText": "账户管理"
+      }
+    },
+    {
+      "path": "pages/data/index",
+      "style": {
+        "navigationBarTitleText": "数据"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "记账",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F6F7FB"
+  },
+  "tabBar": {
+    "color": "#64748B",
+    "selectedColor": "#111827",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/bills/index",
+        "text": "账单"
+      },
+      {
+        "pagePath": "pages/add/index",
+        "text": "记账"
+      },
+      {
+        "pagePath": "pages/stats/index",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/settings/index",
+        "text": "设置"
+      }
+    ]
+  }
+}
