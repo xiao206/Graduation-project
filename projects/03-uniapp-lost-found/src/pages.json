@@ -55,12 +55,6 @@
       }
     },
     {
-      "path": "pages/data/index",
-      "style": {
-        "navigationBarTitleText": "数据"
-      }
-    },
-    {
       "path": "pages/about/index",
       "style": {
         "navigationBarTitleText": "关于"

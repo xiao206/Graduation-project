@@ -246,21 +246,6 @@ export function useLostFoundStore() {
     return true
   }
 
-  function exportJSON() {
-    return JSON.stringify(state.data)
-  }
-
-  function importJSON(raw: string) {
-    try {
-      const parsed = JSON.parse(raw) as LFLedgerData
-      state.data = parsed
-      ensureInitialized()
-      return true
-    } catch {
-      return false
-    }
-  }
-
   function getItemById(id: string) {
     return state.data.items.find((x) => x.id === id)
   }
@@ -291,8 +276,6 @@ export function useLostFoundStore() {
     updateItem,
     setItemStatus,
     deleteItem,
-    exportJSON,
-    importJSON,
     getItemById,
     searchItems,
   }

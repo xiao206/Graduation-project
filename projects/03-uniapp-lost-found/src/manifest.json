@@ -1,7 +1,7 @@
 {
     "name" : "校园失物招领助手",
     "appid" : "",
-    "description" : "纯本地校园失物招领工具（登录注册/发布信息/列表检索/统计/导入导出）",
+    "description" : "纯本地校园失物招领工具（登录注册/发布信息/列表检索/统计）",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,

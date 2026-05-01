@@ -7,7 +7,7 @@
         </view>
         <view class="meta">
           <text class="name">校园失物招领助手</text>
-          <text class="sub">纯本地 · 登录发布 · 检索统计 · 可导入导出</text>
+          <text class="sub">纯本地 · 登录发布 · 检索统计</text>
         </view>
       </view>
 

@@ -41,18 +41,6 @@
           </view>
           <uni-icons type="forward" size="16" color="#94A3B8" />
         </view>
-        <view class="cell" @click="goData">
-          <view class="cell-left">
-            <view class="cell-icon">
-              <uni-icons type="download" size="20" color="var(--text)" />
-            </view>
-            <view class="cell-meta">
-              <text class="cell-title">数据</text>
-              <text class="cell-sub">导出/导入备份</text>
-            </view>
-          </view>
-          <uni-icons type="forward" size="16" color="#94A3B8" />
-        </view>
         <view class="cell" @click="goAbout">
           <view class="cell-left">
             <view class="cell-icon">
@@ -102,10 +90,6 @@ function logout() {
 
 function goCategories() {
   uni.navigateTo({ url: "/pages/categories/index" })
-}
-
-function goData() {
-  uni.navigateTo({ url: "/pages/data/index" })
 }
 
 function goAbout() {
@@ -294,4 +278,3 @@ onShow(() => {
   color: var(--muted);
 }
 </style>
-
