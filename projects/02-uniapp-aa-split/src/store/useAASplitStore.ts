@@ -281,6 +281,30 @@ export function useAASplitStore() {
     return results
   }
 
+  function planTransfers(results: AASettleResult[]) {
+    const receivers = results
+      .filter((x) => x.receiveCents > 0)
+      .map((x) => ({ memberId: x.memberId, name: x.name, remainCents: x.receiveCents }))
+    const payers = results
+      .filter((x) => x.payCents > 0)
+      .map((x) => ({ memberId: x.memberId, name: x.name, remainCents: x.payCents }))
+
+    const transfers: Array<{ fromId: string; fromName: string; toId: string; toName: string; amountCents: number }> = []
+    let i = 0
+    let j = 0
+    while (i < payers.length && j < receivers.length) {
+      const p = payers[i]
+      const r = receivers[j]
+      const amt = Math.min(p.remainCents, r.remainCents)
+      if (amt > 0) transfers.push({ fromId: p.memberId, fromName: p.name, toId: r.memberId, toName: r.name, amountCents: amt })
+      p.remainCents -= amt
+      r.remainCents -= amt
+      if (p.remainCents <= 0) i++
+      if (r.remainCents <= 0) j++
+    }
+    return transfers
+  }
+
   return {
     state,
     membersEnabled,
@@ -300,5 +324,6 @@ export function useAASplitStore() {
     listBillsByMonth,
     groupBillsByDate,
     settle,
+    planTransfers,
   }
 }

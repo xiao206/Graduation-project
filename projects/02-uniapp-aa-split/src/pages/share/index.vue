@@ -20,12 +20,14 @@
           </view>
         </button>
       </view>
-      <textarea v-model="text" class="textarea" auto-height />
+      <view class="preview">
+        <text class="preview-text" selectable>{{ text }}</text>
+      </view>
     </view>
 
     <view class="card">
       <text class="title">说明</text>
-      <text class="sub">把“应收/应付”汇总复制到群里即可。若需要“最少转账次数”，后续可再升级算法。</text>
+      <text class="sub">“转账建议”按应付→应收生成一组转账指令，便于直接发群里。</text>
     </view>
   </view>
 </template>
@@ -66,6 +68,7 @@ function buildText() {
 
   const receive = results.value.filter((x) => x.receiveCents > 0)
   const pay = results.value.filter((x) => x.payCents > 0)
+  const transfers = store.planTransfers(results.value)
 
   const lines: string[] = []
   lines.push(`【宿舍AA结算】${store.state.data.settings.defaultDormName}`)
@@ -86,6 +89,11 @@ function buildText() {
   }
 
   if (!receive.length && !pay.length) lines.push("本次结算无人应收/应付（已平）")
+  else if (transfers.length) {
+    lines.push("")
+    lines.push("转账建议：")
+    for (const t of transfers) lines.push(`- ${t.fromName} → ${t.toName} ¥${formatCents(t.amountCents)}`)
+  }
 
   return lines.join("\n")
 }
@@ -177,14 +185,21 @@ onLoad((q: any) => {
   border: 1px solid var(--border);
 }
 
-.textarea {
+.preview {
   width: 100%;
   min-height: 260rpx;
   padding: 14rpx 16rpx;
   background: var(--surface);
   border-radius: 18rpx;
+  border: 1px solid var(--border);
+}
+
+.preview-text {
   font-size: 24rpx;
   color: var(--text);
-  border: 1px solid var(--border);
+  font-weight: 800;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 </style>
