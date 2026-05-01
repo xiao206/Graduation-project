@@ -32,7 +32,7 @@
         <view class="wx-cell" @click="goMyItems">
           <view class="wx-cell-left">
             <view class="wx-cell-icon">
-              <uni-icons type="folder-filled" size="20" color="var(--text)" />
+              <uni-icons type="paperplane-filled" size="20" color="var(--text)" />
             </view>
             <view class="wx-cell-meta">
               <text class="wx-cell-title">我的发布</text>
