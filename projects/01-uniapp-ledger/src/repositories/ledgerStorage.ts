@@ -19,7 +19,8 @@ function migrate(data: LedgerData): LedgerData {
   next.categories = (next.categories || []).map((c) => {
     const iconRaw = typeof c.icon === "string" ? c.icon.trim() : ""
     const iconLooksLikeType = !!iconRaw && /^[a-z0-9-]+$/i.test(iconRaw)
-    const icon = iconLooksLikeType ? iconRaw : defaultCategoryIcon.get(c.id) || undefined
+    const mappedDefault = defaultCategoryIcon.get(c.id) || undefined
+    const icon = iconRaw === "bag-filled" ? mappedDefault : iconLooksLikeType ? iconRaw : mappedDefault
     return { ...c, icon }
   })
 

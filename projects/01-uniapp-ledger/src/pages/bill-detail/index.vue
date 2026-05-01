@@ -5,31 +5,59 @@
       <button class="primary" @click="back">返回</button>
     </view>
 
-    <view v-else class="card">
-      <view class="top">
-        <view class="icon" :style="{ backgroundColor: category?.color || '#E5E7EB' }">
-          <uni-icons :type="category?.icon || 'more-filled'" size="22" color="#FFFFFF" />
+    <view v-else class="wrap">
+      <view class="hero">
+        <view class="top">
+          <view class="icon" :style="{ backgroundColor: category?.color || '#E5E7EB' }">
+            <uni-icons :type="category?.icon || 'more-filled'" size="28" color="#FFFFFF" />
+          </view>
+          <view class="meta">
+            <text class="name">{{ category?.name || "未分类" }}</text>
+            <text class="sub">{{ occurredAtText }} · {{ account?.name || "账户" }}</text>
+          </view>
         </view>
-        <view class="meta">
-          <text class="name">{{ category?.name || "未分类" }}</text>
-          <text class="sub">{{ dateKey }} · {{ account?.name || "账户" }}</text>
+        <view class="amount-box">
+          <text class="amount" :class="txn.type === 'expense' ? 'expense' : 'income'">
+            {{ txn.type === "expense" ? "-" : "+" }}{{ formatCents(txn.amountCents) }}
+          </text>
+          <text class="amount-sub">{{ typeText }}</text>
         </view>
       </view>
 
-      <view class="amount-row">
-        <text class="amount" :class="txn.type === 'expense' ? 'expense' : 'income'">
-          {{ txn.type === "expense" ? "-" : "+" }}{{ formatCents(txn.amountCents) }}
-        </text>
+      <view class="detail">
+        <view class="row">
+          <text class="k">分类</text>
+          <text class="v">{{ category?.name || "未分类" }}</text>
+        </view>
+        <view class="row">
+          <text class="k">账户</text>
+          <text class="v">{{ account?.name || "账户" }}</text>
+        </view>
+        <view class="row">
+          <text class="k">日期</text>
+          <text class="v">{{ occurredAtText }}</text>
+        </view>
+        <view class="row">
+          <text class="k">备注</text>
+          <text class="v" :class="txn.note ? '' : 'v-muted'">{{ txn.note || "无" }}</text>
+        </view>
+        <view class="row">
+          <text class="k">创建</text>
+          <text class="v">{{ createdAtText }}</text>
+        </view>
+        <view class="row">
+          <text class="k">更新</text>
+          <text class="v">{{ updatedAtText }}</text>
+        </view>
+        <view class="row row-last" @click="copyId">
+          <text class="k">ID</text>
+          <text class="v v-mono">{{ txn.id }}</text>
+        </view>
       </view>
 
-      <view v-if="txn.note" class="note">
-        <text class="note-label">备注</text>
-        <text class="note-text">{{ txn.note }}</text>
-      </view>
-
-      <view class="actions">
-        <button class="ghost" @click="edit">编辑</button>
-        <button class="danger" @click="remove">删除</button>
+      <view class="bottom">
+        <button class="btn ghost" @click="edit">编辑</button>
+        <button class="btn danger" @click="remove">删除</button>
       </view>
     </view>
   </view>
@@ -39,7 +67,6 @@
 import { computed, ref } from "vue"
 import { onLoad } from "@dcloudio/uni-app"
 import { useLedgerStore } from "@/store/useLedgerStore"
-import { parseISOToDateKey } from "@/utils/date"
 import { formatCents } from "@/utils/money"
 
 const store = useLedgerStore()
@@ -60,11 +87,36 @@ const account = computed(() => {
   return store.state.data.accounts.find((a) => a.id === t.accountId)
 })
 
-const dateKey = computed(() => {
+function formatDateTime(iso: string) {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ""
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, "0")
+  const day = String(d.getDate()).padStart(2, "0")
+  const hh = String(d.getHours()).padStart(2, "0")
+  const mm = String(d.getMinutes()).padStart(2, "0")
+  return `${y}-${m}-${day} ${hh}:${mm}`
+}
+
+const occurredAtText = computed(() => {
   const t = txn.value
   if (!t) return ""
-  return parseISOToDateKey(t.occurredAt)
+  return formatDateTime(t.occurredAt)
 })
+
+const createdAtText = computed(() => {
+  const t = txn.value
+  if (!t) return ""
+  return formatDateTime(t.createdAt)
+})
+
+const updatedAtText = computed(() => {
+  const t = txn.value
+  if (!t) return ""
+  return formatDateTime(t.updatedAt)
+})
+
+const typeText = computed(() => (txn.value?.type === "income" ? "收入" : "支出"))
 
 function back() {
   uni.navigateBack()
@@ -91,6 +143,11 @@ function remove() {
   })
 }
 
+function copyId() {
+  if (!txn.value) return
+  uni.setClipboardData({ data: txn.value.id })
+}
+
 onLoad((q: any) => {
   id.value = String(q?.id || "")
 })
@@ -103,7 +160,11 @@ onLoad((q: any) => {
   padding: 24rpx;
 }
 
-.card {
+.wrap {
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+}
+
+.hero {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 20rpx;
@@ -118,16 +179,27 @@ onLoad((q: any) => {
 }
 
 .icon {
-  width: 84rpx;
-  height: 84rpx;
-  border-radius: 24rpx;
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 26rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
-.icon-text {
-  font-size: 40rpx;
+.icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.12));
+}
+
+.icon > * {
+  position: relative;
+  z-index: 1;
 }
 
 .meta {
@@ -147,17 +219,27 @@ onLoad((q: any) => {
   color: var(--muted);
 }
 
-.amount-row {
-  margin-top: 20rpx;
+.amount-box {
+  margin-top: 18rpx;
   padding: 18rpx 18rpx;
   background: var(--primary-ghost);
   border-radius: var(--radius);
   border: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
 }
 
 .amount {
-  font-size: 52rpx;
+  font-size: 54rpx;
   font-weight: 900;
+}
+
+.amount-sub {
+  font-size: 22rpx;
+  color: var(--muted);
+  font-weight: 800;
 }
 
 .expense {
@@ -168,36 +250,77 @@ onLoad((q: any) => {
   color: #22c55e;
 }
 
-.note {
-  margin-top: 16rpx;
-  padding: 16rpx 18rpx;
-  background: var(--primary-ghost);
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  gap: 8rpx;
+.detail {
+  margin-top: 14rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
-.note-label {
-  font-size: 22rpx;
+.row {
+  padding: 18rpx 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14rpx;
+  border-bottom: 1px solid var(--border);
+}
+
+.row-last {
+  border-bottom: none;
+}
+
+.k {
+  font-size: 24rpx;
   color: var(--muted);
+  font-weight: 800;
 }
 
-.note-text {
+.v {
   font-size: 26rpx;
   color: var(--text);
+  font-weight: 800;
+  max-width: 440rpx;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.v-muted {
+  color: var(--muted);
   font-weight: 700;
 }
 
-.actions {
-  margin-top: 20rpx;
+.v-mono {
+  font-size: 22rpx;
+  letter-spacing: 0.2px;
+}
+
+.bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12rpx 24rpx calc(12rpx + env(safe-area-inset-bottom));
+  background: rgba(247, 248, 250, 0.92);
+  border-top: 1px solid var(--border);
   display: flex;
   gap: 12rpx;
 }
 
-.ghost {
+.btn {
   flex: 1;
+  height: 84rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.ghost {
   background: var(--card);
   border-radius: var(--radius);
   color: var(--text);
@@ -205,7 +328,6 @@ onLoad((q: any) => {
 }
 
 .danger {
-  flex: 1;
   background: rgba(239, 68, 68, 0.12);
   border-radius: var(--radius);
   color: #ef4444;

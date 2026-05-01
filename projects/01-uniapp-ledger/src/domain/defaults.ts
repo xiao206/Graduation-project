@@ -4,7 +4,7 @@ export const LEDGER_DATA_VERSION = 1
 
 export const defaultCategories: Category[] = [
   { id: "c_exp_food", type: "expense", name: "餐饮", icon: "shop-filled", color: "#F97316", order: 10, enabled: true },
-  { id: "c_exp_shop", type: "expense", name: "购物", icon: "bag-filled", color: "#EC4899", order: 20, enabled: true },
+  { id: "c_exp_shop", type: "expense", name: "购物", icon: "cart-filled", color: "#EC4899", order: 20, enabled: true },
   { id: "c_exp_trans", type: "expense", name: "交通", icon: "paperplane-filled", color: "#3B82F6", order: 30, enabled: true },
   { id: "c_exp_home", type: "expense", name: "居住", icon: "home-filled", color: "#10B981", order: 40, enabled: true },
   { id: "c_exp_play", type: "expense", name: "娱乐", icon: "star-filled", color: "#8B5CF6", order: 50, enabled: true },

@@ -26,7 +26,7 @@
           <view v-for="t in g.items" :key="t.id" class="item" @click="goDetail(t.id)">
             <view class="left">
               <view class="icon" :style="{ backgroundColor: categoryMap.get(t.categoryId)?.color || '#E5E7EB' }">
-                <uni-icons :type="categoryMap.get(t.categoryId)?.icon || 'more-filled'" size="20" color="#FFFFFF" />
+                <uni-icons :type="categoryMap.get(t.categoryId)?.icon || 'more-filled'" size="24" color="#FFFFFF" />
               </view>
               <view class="meta">
                 <text class="name">{{ categoryMap.get(t.categoryId)?.name || "未分类" }}</text>
@@ -217,6 +217,21 @@ function goAdd() {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.12));
+}
+
+.icon > * {
+  position: relative;
+  z-index: 1;
 }
 
 .icon-text {

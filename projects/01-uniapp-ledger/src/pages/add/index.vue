@@ -42,7 +42,7 @@
           @click="categoryId = c.id"
         >
           <view class="cat-icon" :style="{ backgroundColor: c.color || '#E5E7EB' }">
-            <uni-icons :type="c.icon || 'more-filled'" size="22" color="#FFFFFF" />
+            <uni-icons :type="c.icon || 'more-filled'" size="24" color="#FFFFFF" />
           </view>
           <text class="cat-name">{{ c.name }}</text>
         </view>
@@ -368,6 +368,21 @@ onShow(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.cat-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.12));
+}
+
+.cat-icon > * {
+  position: relative;
+  z-index: 1;
 }
 
 .cat-icon-text {
