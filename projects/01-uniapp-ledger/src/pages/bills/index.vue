@@ -10,6 +10,21 @@
       <input v-model="keyword" class="search" placeholder="搜索备注/分类" placeholder-class="ph" />
     </view>
 
+    <view class="summary">
+      <view class="sum-item">
+        <text class="sum-k">支出</text>
+        <text class="sum-v expense">{{ monthExpenseText }}</text>
+      </view>
+      <view class="sum-item">
+        <text class="sum-k">收入</text>
+        <text class="sum-v income">{{ monthIncomeText }}</text>
+      </view>
+      <view class="sum-item">
+        <text class="sum-k">结余</text>
+        <text class="sum-v">{{ formatCents(monthIncome - monthExpense) }}</text>
+      </view>
+    </view>
+
     <view v-if="groups.length === 0" class="empty">
       <text class="empty-title">本月还没有账单</text>
       <text class="empty-sub">去记一笔，之后这里会按日期整理</text>
@@ -40,7 +55,11 @@
           </view>
         </view>
       </view>
-      <view style="height: 220rpx" />
+      <view class="tail">
+        <text class="tail-title">本月共 {{ filtered.length }} 笔</text>
+        <text class="tail-sub">继续记账，数据会更清晰</text>
+        <button class="tail-btn" @click="goAdd">记一笔</button>
+      </view>
     </scroll-view>
   </view>
 </template>
@@ -79,6 +98,11 @@ const filtered = computed(() => {
     return `${c} ${note}`.toLowerCase().includes(q)
   })
 })
+
+const monthExpense = computed(() => filtered.value.filter((t) => t.type === "expense").reduce((s, t) => s + t.amountCents, 0))
+const monthIncome = computed(() => filtered.value.filter((t) => t.type === "income").reduce((s, t) => s + t.amountCents, 0))
+const monthExpenseText = computed(() => (monthExpense.value > 0 ? `-${formatCents(monthExpense.value)}` : "0.00"))
+const monthIncomeText = computed(() => `+${formatCents(monthIncome.value)}`)
 
 const groups = computed(() => {
   const raw = store.groupTxnsByDate(filtered.value)
@@ -166,8 +190,38 @@ function goAdd() {
   color: #94a3b8;
 }
 
+.summary {
+  padding: 0 24rpx 14rpx;
+  display: flex;
+  gap: 12rpx;
+}
+
+.sum-item {
+  flex: 1;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 16rpx;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.sum-k {
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.sum-v {
+  font-size: 30rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
 .scroll {
-  height: calc(100vh - 108rpx);
+  height: calc(100vh - 108rpx - 130rpx);
+  padding-bottom: calc(24rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .group {
@@ -305,5 +359,38 @@ function goAdd() {
   background: var(--primary);
   color: #ffffff;
   border-radius: var(--radius);
+}
+
+.tail {
+  margin: 8rpx 24rpx 0;
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px dashed rgba(148, 163, 184, 0.7);
+  border-radius: var(--radius-lg);
+  padding: 22rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  align-items: flex-start;
+}
+
+.tail-title {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.tail-sub {
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.tail-btn {
+  margin-top: 4rpx;
+  height: 76rpx;
+  padding: 0 26rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 900;
 }
 </style>
