@@ -17,6 +17,8 @@
       <text class="title">{{ item.title }}</text>
       <text class="meta">{{ metaText }}</text>
 
+      <view class="divider" />
+
       <view v-if="item.description" class="block">
         <text class="k">描述</text>
         <text class="p">{{ item.description }}</text>
@@ -24,8 +26,13 @@
 
       <view class="block">
         <text class="k">联系方式</text>
-        <text class="p">{{ item.contact || "未填写" }}</text>
-        <button v-if="item.contact" class="ghost" @click="copy(item.contact)">复制联系方式</button>
+        <text class="p" :class="!item.contact ? 'p-muted' : ''">{{ item.contact || "未填写" }}</text>
+        <button v-if="item.contact" class="ghost-sm" @click="copy(item.contact)">
+          <view class="btn-inner-sm">
+            <uni-icons type="copy" size="16" color="var(--text)" />
+            <text>复制</text>
+          </view>
+        </button>
       </view>
 
       <view class="actions">
@@ -36,11 +43,38 @@
 
     <view v-if="item && isOwner" class="card">
       <text class="card-title">管理</text>
-      <view class="manage">
-        <button class="ghost" @click="setStatus('claimed')">标记已认领</button>
-        <button class="ghost" @click="setStatus('closed')">标记已结束</button>
-        <button class="danger" @click="remove">删除</button>
+      <view class="manage-list">
+        <view class="manage-cell" @click="setStatus('claimed')">
+          <view class="manage-left">
+            <view class="manage-icon manage-claimed">
+              <uni-icons type="checkbox-filled" size="18" color="#ffffff" />
+            </view>
+            <view class="manage-meta">
+              <text class="manage-title">标记已认领</text>
+              <text class="manage-sub">将状态更新为已认领</text>
+            </view>
+          </view>
+          <uni-icons type="forward" size="16" color="#94A3B8" />
+        </view>
+        <view class="manage-cell" @click="setStatus('closed')">
+          <view class="manage-left">
+            <view class="manage-icon manage-closed">
+              <uni-icons type="flag-filled" size="18" color="#ffffff" />
+            </view>
+            <view class="manage-meta">
+              <text class="manage-title">标记已结束</text>
+              <text class="manage-sub">关闭信息，不再作为进行中</text>
+            </view>
+          </view>
+          <uni-icons type="forward" size="16" color="#94A3B8" />
+        </view>
       </view>
+      <button class="danger" @click="remove">
+        <view class="btn-inner-sm">
+          <uni-icons type="trash" size="16" color="var(--danger)" />
+          <text>删除信息</text>
+        </view>
+      </button>
     </view>
   </view>
 </template>
@@ -132,7 +166,7 @@ onLoad((q: any) => {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: var(--shadow);
 }
 
@@ -197,6 +231,12 @@ onLoad((q: any) => {
   color: var(--muted);
 }
 
+.divider {
+  margin-top: 18rpx;
+  height: 1px;
+  background: rgba(15, 23, 42, 0.06);
+}
+
 .block {
   margin-top: 18rpx;
   display: flex;
@@ -217,6 +257,11 @@ onLoad((q: any) => {
   line-height: 1.7;
 }
 
+.p-muted {
+  color: rgba(100, 116, 139, 0.9);
+  font-weight: 900;
+}
+
 .actions {
   margin-top: 18rpx;
   display: flex;
@@ -225,21 +270,42 @@ onLoad((q: any) => {
 
 .primary {
   flex: 1;
-  height: 86rpx;
+  height: 90rpx;
   border-radius: 999rpx;
   background: var(--primary);
   color: #ffffff;
   font-weight: 900;
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.22);
 }
 
 .ghost {
-  margin-top: 6rpx;
+  flex: 1;
+  height: 90rpx;
+  border-radius: 999rpx;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font-weight: 900;
+}
+
+.ghost-sm {
   height: 76rpx;
   border-radius: 999rpx;
   background: var(--surface);
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   font-weight: 900;
+  align-self: flex-start;
+}
+
+.btn-inner-sm {
+  height: 76rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  font-size: 26rpx;
 }
 
 .card-title {
@@ -249,14 +315,71 @@ onLoad((q: any) => {
   margin-bottom: 14rpx;
 }
 
-.manage {
+.manage-list {
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.manage-cell {
+  padding: 18rpx 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12rpx;
+  background: var(--card);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.manage-cell:last-child {
+  border-bottom: none;
+}
+
+.manage-left {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.manage-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manage-claimed {
+  background: rgba(22, 163, 74, 0.92);
+}
+
+.manage-closed {
+  background: rgba(100, 116, 139, 0.92);
+}
+
+.manage-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.manage-title {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.manage-sub {
+  font-size: 22rpx;
+  color: var(--muted);
 }
 
 .danger {
-  height: 86rpx;
+  margin-top: 12rpx;
+  height: 90rpx;
   border-radius: 999rpx;
   background: rgba(239, 68, 68, 0.12);
   color: var(--danger);
@@ -264,4 +387,3 @@ onLoad((q: any) => {
   font-weight: 900;
 }
 </style>
-
