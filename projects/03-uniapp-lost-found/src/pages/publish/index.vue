@@ -153,10 +153,10 @@ onShow(() => {})
 
 .gate {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 14rpx;
@@ -193,7 +193,7 @@ onShow(() => {})
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: var(--shadow);
 }
 
@@ -206,6 +206,7 @@ onShow(() => {})
 .type-toggle {
   margin-top: 14rpx;
   background: var(--chip);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
@@ -222,6 +223,7 @@ onShow(() => {})
 
 .seg-active {
   background: var(--card);
+  box-shadow: var(--shadow-sm);
 }
 
 .seg-text {
@@ -292,7 +294,7 @@ onShow(() => {})
   background: var(--primary);
   color: #ffffff;
   font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.28);
 }
 
 .btn-inner {
@@ -305,4 +307,3 @@ onShow(() => {})
   font-size: 30rpx;
 }
 </style>
-

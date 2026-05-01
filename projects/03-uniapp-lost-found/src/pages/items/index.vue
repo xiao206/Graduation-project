@@ -124,6 +124,7 @@ function goPublish() {
 .toggle {
   flex: 1;
   background: var(--chip);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
@@ -140,6 +141,7 @@ function goPublish() {
 
 .seg-active {
   background: var(--card);
+  box-shadow: var(--shadow-sm);
 }
 
 .seg-text {
@@ -153,7 +155,8 @@ function goPublish() {
   padding: 0 16rpx;
   background: var(--card);
   border-radius: 999rpx;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
   gap: 10rpx;
@@ -181,9 +184,10 @@ function goPublish() {
 
 .summary-card {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: var(--radius-lg);
   padding: 16rpx 16rpx;
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 10rpx;
@@ -242,7 +246,8 @@ function goPublish() {
 .cell {
   margin-top: 12rpx;
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-sm);
   border-radius: var(--radius-lg);
   padding: 18rpx 18rpx;
   display: flex;
@@ -341,4 +346,3 @@ function goPublish() {
   font-weight: 900;
 }
 </style>
-

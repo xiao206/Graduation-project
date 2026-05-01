@@ -189,7 +189,7 @@ function goDetail(id: string) {
   border-radius: 999rpx;
   background: var(--card);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,6 +198,7 @@ function goDetail(id: string) {
 .toggle {
   margin-top: 16rpx;
   background: var(--chip);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
@@ -214,6 +215,7 @@ function goDetail(id: string) {
 
 .seg-active {
   background: var(--card);
+  box-shadow: var(--shadow-sm);
 }
 
 .seg-text {
@@ -231,9 +233,10 @@ function goDetail(id: string) {
 
 .kpi-item {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: var(--radius-lg);
   padding: 16rpx;
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 8rpx;
@@ -258,7 +261,7 @@ function goDetail(id: string) {
   background: var(--primary);
   color: #ffffff;
   font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.28);
 }
 
 .btn-inner {
@@ -303,9 +306,10 @@ function goDetail(id: string) {
 
 .empty {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: var(--radius-lg);
   padding: 28rpx;
+  box-shadow: var(--shadow-sm);
 }
 
 .empty-title {
@@ -328,9 +332,10 @@ function goDetail(id: string) {
 
 .list {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .cell {
@@ -338,7 +343,7 @@ function goDetail(id: string) {
   align-items: flex-start;
   gap: 14rpx;
   padding: 18rpx 18rpx;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .cell:last-child {
@@ -404,4 +409,3 @@ function goDetail(id: string) {
   color: var(--muted);
 }
 </style>
-
