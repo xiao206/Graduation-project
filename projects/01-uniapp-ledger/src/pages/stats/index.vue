@@ -165,7 +165,7 @@ function goAdd() {
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding: 18rpx 24rpx calc(24rpx + var(--tabbar) + var(--safe-bottom));
+  padding: 18rpx 24rpx 24rpx;
 }
 
 .toolbar {

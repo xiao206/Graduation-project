@@ -232,7 +232,7 @@ onShow(() => {
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding-bottom: calc(24rpx + var(--tabbar) + var(--safe-bottom));
+  padding-bottom: 24rpx;
 }
 
 .top {
@@ -417,7 +417,6 @@ onShow(() => {
 
 .kbd {
   padding: 12rpx 24rpx;
-  padding-bottom: calc(12rpx + var(--safe-bottom));
 }
 
 .kbd-grid {
