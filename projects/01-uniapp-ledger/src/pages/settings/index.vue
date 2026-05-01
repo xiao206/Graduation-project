@@ -90,7 +90,7 @@ function go(url: string) {
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding: 24rpx;
+  padding: 24rpx 24rpx calc(24rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .card {

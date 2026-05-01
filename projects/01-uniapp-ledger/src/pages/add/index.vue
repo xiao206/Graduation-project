@@ -232,7 +232,7 @@ onShow(() => {
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding-bottom: 24rpx;
+  padding-bottom: calc(24rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .top {
@@ -357,8 +357,13 @@ onShow(() => {
 }
 
 .cat-active {
-  border-color: rgba(17, 24, 39, 0.5);
-  box-shadow: var(--shadow);
+  border-color: rgba(17, 24, 39, 0.9);
+  background: rgba(17, 24, 39, 0.03);
+  box-shadow: 0 10rpx 26rpx rgba(15, 23, 42, 0.08);
+}
+
+.cat-active .cat-name {
+  font-weight: 900;
 }
 
 .cat-icon {
@@ -412,16 +417,17 @@ onShow(() => {
 
 .kbd {
   padding: 12rpx 24rpx;
+  padding-bottom: calc(12rpx + var(--safe-bottom));
 }
 
 .kbd-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12rpx;
+  gap: 14rpx;
 }
 
 .key {
-  height: 86rpx;
+  height: 92rpx;
   border-radius: var(--radius);
   background: var(--card);
   display: flex;
@@ -431,25 +437,34 @@ onShow(() => {
 }
 
 .key-fn {
-  background: var(--primary-ghost);
+  background: rgba(100, 116, 139, 0.08);
+  border-color: rgba(100, 116, 139, 0.18);
 }
 
 .key-ok {
   grid-column: span 4;
-  height: 94rpx;
+  height: 104rpx;
   background: var(--primary);
   border: none;
-  box-shadow: var(--shadow);
+  box-shadow: 0 22rpx 60rpx rgba(17, 24, 39, 0.28);
 }
 
 .key-text {
-  font-size: 30rpx;
-  font-weight: 800;
+  font-size: 32rpx;
+  font-weight: 900;
   color: var(--text);
+}
+
+.key-fn .key-text {
+  color: var(--muted);
 }
 
 .key-ok .key-text {
   color: #ffffff;
+}
+
+.key:active {
+  transform: scale(0.985);
 }
 
 .actions {

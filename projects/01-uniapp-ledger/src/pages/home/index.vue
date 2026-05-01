@@ -17,11 +17,11 @@
         <view class="summary-top">
           <view class="summary-item">
             <text class="label">本月支出</text>
-            <text class="value expense">-{{ formatCents(monthExpense) }}</text>
+            <text class="value expense">{{ monthExpenseText }}</text>
           </view>
           <view class="summary-item">
             <text class="label">本月收入</text>
-            <text class="value income">+{{ formatCents(monthIncome) }}</text>
+            <text class="value income">{{ monthIncomeText }}</text>
           </view>
         </view>
         <view class="summary-bottom">
@@ -44,6 +44,7 @@
       </view>
       <view v-if="recent.length === 0" class="empty">
         <text class="empty-text">还没有账单，先记一笔吧</text>
+        <text class="empty-sub">例如：午饭、地铁、水电费</text>
         <button class="primary-btn" @click="goAdd">记一笔</button>
       </view>
       <view v-else class="list">
@@ -99,6 +100,9 @@ const monthTxns = computed(() => store.listTxnsByMonth(monthKey.value))
 
 const monthExpense = computed(() => monthTxns.value.filter((t) => t.type === "expense").reduce((s, t) => s + t.amountCents, 0))
 const monthIncome = computed(() => monthTxns.value.filter((t) => t.type === "income").reduce((s, t) => s + t.amountCents, 0))
+
+const monthExpenseText = computed(() => (monthExpense.value > 0 ? `-${formatCents(monthExpense.value)}` : "0.00"))
+const monthIncomeText = computed(() => `+${formatCents(monthIncome.value)}`)
 
 const budgetRemainText = computed(() => {
   const b = store.getBudget(monthKey.value)
@@ -271,6 +275,11 @@ function goAssets() {
   font-size: 26rpx;
 }
 
+.empty-sub {
+  color: rgba(100, 116, 139, 0.85);
+  font-size: 22rpx;
+}
+
 .primary-btn {
   background: var(--primary);
   color: #ffffff;
@@ -363,7 +372,7 @@ function goAssets() {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 30rpx;
+  bottom: calc(24rpx + var(--tabbar) + var(--safe-bottom));
   display: flex;
   justify-content: center;
   pointer-events: none;

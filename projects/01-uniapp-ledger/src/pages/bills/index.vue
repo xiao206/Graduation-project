@@ -13,6 +13,7 @@
     <view v-if="groups.length === 0" class="empty">
       <text class="empty-title">本月还没有账单</text>
       <text class="empty-sub">去记一笔，之后这里会按日期整理</text>
+      <text class="empty-sub">支持搜索备注/分类</text>
       <button class="primary" @click="goAdd">记一笔</button>
     </view>
 
@@ -20,7 +21,7 @@
       <view v-for="g in groups" :key="g.date" class="group">
         <view class="group-head">
           <text class="group-date">{{ g.date }}</text>
-          <text class="group-sum">支出 -{{ formatCents(g.expense) }} · 收入 +{{ formatCents(g.income) }}</text>
+            <text class="group-sum">支出 {{ expenseText(g.expense) }} · 收入 {{ incomeText(g.income) }}</text>
         </view>
         <view class="list">
           <view v-for="t in g.items" :key="t.id" class="item" @click="goDetail(t.id)">
@@ -39,7 +40,7 @@
           </view>
         </view>
       </view>
-      <view style="height: 60rpx" />
+      <view style="height: 220rpx" />
     </scroll-view>
   </view>
 </template>
@@ -87,6 +88,14 @@ const groups = computed(() => {
     return { ...g, expense, income }
   })
 })
+
+function expenseText(cents: number) {
+  return cents > 0 ? `-${formatCents(cents)}` : "0.00"
+}
+
+function incomeText(cents: number) {
+  return `+${formatCents(cents)}`
+}
 
 function itemSub(t: Transaction) {
   const acc = accountMap.value.get(t.accountId) || "账户"

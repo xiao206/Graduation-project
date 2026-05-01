@@ -12,11 +12,11 @@
     <view class="summary">
       <view class="sum-item">
         <text class="label">支出</text>
-        <text class="value expense">-{{ formatCents(monthExpense) }}</text>
+        <text class="value expense">{{ monthExpenseText }}</text>
       </view>
       <view class="sum-item">
         <text class="label">收入</text>
-        <text class="value income">+{{ formatCents(monthIncome) }}</text>
+        <text class="value income">{{ monthIncomeText }}</text>
       </view>
       <view class="sum-item">
         <text class="label">结余</text>
@@ -31,6 +31,7 @@
       </view>
       <view v-if="expenseTotalCents <= 0" class="empty">
         <text class="empty-text">本月还没有支出</text>
+        <button class="empty-btn" @click="goAdd">去记一笔</button>
       </view>
       <view v-else class="chart-row">
         <view class="chart">
@@ -57,6 +58,7 @@
       </view>
       <view v-if="dailyExpenseMax <= 0" class="empty">
         <text class="empty-text">暂无数据</text>
+        <button class="empty-btn" @click="goAdd">去记一笔</button>
       </view>
       <view v-else class="trend">
         <view v-for="d in daily" :key="d.date" class="trend-row">
@@ -64,7 +66,7 @@
           <view class="bar-wrap">
             <view class="bar" :style="{ width: barWidth(d.expense) }" />
           </view>
-          <text class="trend-val">-{{ formatCents(d.expense) }}</text>
+          <text class="trend-val">{{ expenseText(d.expense) }}</text>
         </view>
       </view>
     </view>
@@ -91,6 +93,9 @@ const monthTxns = computed(() => store.listTxnsByMonth(monthKey.value))
 
 const monthExpense = computed(() => monthTxns.value.filter((t) => t.type === "expense").reduce((s, t) => s + t.amountCents, 0))
 const monthIncome = computed(() => monthTxns.value.filter((t) => t.type === "income").reduce((s, t) => s + t.amountCents, 0))
+
+const monthExpenseText = computed(() => (monthExpense.value > 0 ? `-${formatCents(monthExpense.value)}` : "0.00"))
+const monthIncomeText = computed(() => `+${formatCents(monthIncome.value)}`)
 
 const expenseTotalCents = computed(() => monthExpense.value)
 
@@ -121,6 +126,10 @@ function percentText(cents: number) {
   return `${Math.round((cents / total) * 100)}%`
 }
 
+function expenseText(cents: number) {
+  return cents > 0 ? `-${formatCents(cents)}` : "0.00"
+}
+
 const daily = computed(() => {
   const map = new Map<string, number>()
   for (const t of monthTxns.value) {
@@ -146,13 +155,17 @@ function onPickMonth(e: any) {
   const v = String(e?.detail?.value || "")
   monthKey.value = v.slice(0, 7)
 }
+
+function goAdd() {
+  uni.switchTab({ url: "/pages/add/index" })
+}
 </script>
 
 <style scoped>
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding: 18rpx 24rpx 24rpx;
+  padding: 18rpx 24rpx calc(24rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .toolbar {
@@ -248,11 +261,23 @@ function onPickMonth(e: any) {
 
 .empty {
   padding: 10rpx 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
 }
 
 .empty-text {
   font-size: 24rpx;
   color: var(--muted);
+}
+
+.empty-btn {
+  width: 260rpx;
+  height: 76rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 900;
 }
 
 .chart-row {

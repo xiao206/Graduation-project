@@ -26,7 +26,7 @@
           <view class="progress-inner" :style="{ width: progressWidth }" />
         </view>
         <view class="progress-meta">
-          <text class="meta-text">已用 -{{ formatCents(monthExpense) }}</text>
+          <text class="meta-text">已用 {{ usedText }}</text>
           <text class="meta-text">剩余 {{ budgetRemainText }}</text>
         </view>
       </view>
@@ -90,6 +90,8 @@ const progressWidth = computed(() => {
   const p = Math.min(1, monthExpense.value / b.totalCents)
   return `${Math.round(p * 100)}%`
 })
+
+const usedText = computed(() => (monthExpense.value > 0 ? `¥${formatCents(monthExpense.value)}` : "¥0.00"))
 
 function saveBudget() {
   if (!budgetInput.value.trim()) {
