@@ -1,5 +1,5 @@
 import { computed, reactive } from "vue"
-import type { AABill, AACategory, AALedgerData, AAMember, AASettleResult } from "@/domain/types"
+import type { AABill, AACategory, AALedgerData, AAMember, AASettleResult, AASettings } from "@/domain/types"
 import { createEmptyLedgerData } from "@/domain/defaults"
 import { loadLedgerData, saveLedgerData } from "@/repositories/aaStorage"
 import { parseISOToDateKey, toMonthKey } from "@/utils/date"
@@ -86,6 +86,18 @@ export function useAASplitStore() {
   const membersEnabled = computed(() => state.data.members.filter((m) => m.enabled))
   const categoriesEnabled = computed(() => state.data.categories.filter((c) => c.enabled).sort((a, b) => a.order - b.order))
   const recentBills = computed(() => state.data.bills.slice(0, 20))
+
+  function updateSettings(patch: Partial<AASettings>) {
+    state.data.settings = {
+      ...state.data.settings,
+      ...patch,
+      defaultParticipantIds: Array.isArray(patch.defaultParticipantIds)
+        ? patch.defaultParticipantIds.map(String).filter(Boolean)
+        : state.data.settings.defaultParticipantIds,
+      currency: "CNY",
+    }
+    persist()
+  }
 
   function upsertMember(member: AAMember) {
     const idx = state.data.members.findIndex((m) => m.id === member.id)
@@ -274,6 +286,7 @@ export function useAASplitStore() {
     membersEnabled,
     categoriesEnabled,
     recentBills,
+    updateSettings,
     upsertMember,
     setMemberEnabled,
     upsertCategory,
