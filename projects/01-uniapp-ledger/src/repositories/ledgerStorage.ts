@@ -7,11 +7,21 @@ const STORAGE_KEY = "gp:ledger"
 function migrate(data: LedgerData): LedgerData {
   if (!data.version) data.version = 0
 
+  const defaults = createEmptyLedgerData()
+  const defaultCategoryIcon = new Map(defaults.categories.map((c) => [c.id, c.icon] as const))
+
   const next: LedgerData = {
-    ...createEmptyLedgerData(),
+    ...defaults,
     ...data,
     version: LEDGER_DATA_VERSION,
   }
+
+  next.categories = (next.categories || []).map((c) => {
+    const iconRaw = typeof c.icon === "string" ? c.icon.trim() : ""
+    const iconLooksLikeType = !!iconRaw && /^[a-z0-9-]+$/i.test(iconRaw)
+    const icon = iconLooksLikeType ? iconRaw : defaultCategoryIcon.get(c.id) || undefined
+    return { ...c, icon }
+  })
 
   next.transactions = (next.transactions || [])
     .filter((t) => t && typeof t.id === "string")

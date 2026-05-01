@@ -74,7 +74,6 @@
     }
   },
   "tabBar": {
-    "custom": true,
     "color": "#64748B",
     "selectedColor": "#111827",
     "backgroundColor": "#FFFFFF",
@@ -82,23 +81,33 @@
     "list": [
       {
         "pagePath": "pages/home/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "static/tabbar/home.svg",
+        "selectedIconPath": "static/tabbar/home-active.svg"
       },
       {
         "pagePath": "pages/bills/index",
-        "text": "账单"
+        "text": "账单",
+        "iconPath": "static/tabbar/receipt.svg",
+        "selectedIconPath": "static/tabbar/receipt-active.svg"
       },
       {
         "pagePath": "pages/add/index",
-        "text": "记账"
+        "text": "记账",
+        "iconPath": "static/tabbar/plus.svg",
+        "selectedIconPath": "static/tabbar/plus-active.svg"
       },
       {
         "pagePath": "pages/stats/index",
-        "text": "统计"
+        "text": "统计",
+        "iconPath": "static/tabbar/chart.svg",
+        "selectedIconPath": "static/tabbar/chart-active.svg"
       },
       {
         "pagePath": "pages/settings/index",
-        "text": "设置"
+        "text": "设置",
+        "iconPath": "static/tabbar/settings.svg",
+        "selectedIconPath": "static/tabbar/settings-active.svg"
       }
     ]
   }

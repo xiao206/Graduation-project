@@ -52,7 +52,15 @@ function recalcAccountBalances() {
 }
 
 function ensureInitialized() {
-  if (!state.data || typeof state.data.version !== "number") state.data = createEmptyLedgerData()
+  const defaults = createEmptyLedgerData()
+  if (!state.data || typeof state.data.version !== "number") state.data = defaults
+  const defaultCategoryIcon = new Map(defaults.categories.map((c) => [c.id, c.icon] as const))
+  state.data.categories = (state.data.categories || []).map((c) => {
+    const iconRaw = typeof c.icon === "string" ? c.icon.trim() : ""
+    const iconLooksLikeType = !!iconRaw && /^[a-z0-9-]+$/i.test(iconRaw)
+    const icon = iconLooksLikeType ? iconRaw : defaultCategoryIcon.get(c.id) || undefined
+    return { ...c, icon }
+  })
   state.data.transactions = (state.data.transactions || [])
     .map((t) => ({
       ...t,
