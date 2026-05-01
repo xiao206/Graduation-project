@@ -7,6 +7,10 @@
         <text class="amount-prefix">¥</text>
         <input v-model="amountYuan" class="amount-input" type="digit" placeholder="0.00" placeholder-class="ph-amount" />
       </view>
+      <view class="quick">
+        <view v-for="x in quickAmounts" :key="x" class="q" @click="applyQuick(x)">+{{ x }}</view>
+        <view class="q ghost" @click="clearAmount">清空</view>
+      </view>
 
       <view class="group">
         <picker :range="categoryNames" :value="categoryIndex" @change="onPickCategory">
@@ -44,6 +48,7 @@
         <view class="cell">
           <text class="cell-k">参与人</text>
           <view class="cell-v">
+            <text class="count" :class="participantIds.length ? '' : 'count-warn'">已选 {{ participantIds.length }}</text>
             <view class="mini-actions">
               <view class="mini" @click="selectAll">全选</view>
               <view class="mini" @click="selectNone">清空</view>
@@ -102,6 +107,7 @@ const payerIndex = computed(() => Math.max(0, members.value.findIndex((m) => m.i
 
 const currentCategoryName = computed(() => categories.value[categoryIndex.value]?.name || "请选择")
 const currentPayerName = computed(() => members.value[payerIndex.value]?.name || "请选择")
+const quickAmounts = [10, 20, 30, 50, 100]
 
 function onPickCategory(e: any) {
   const i = Number(e?.detail?.value || 0)
@@ -111,6 +117,7 @@ function onPickCategory(e: any) {
 function onPickPayer(e: any) {
   const i = Number(e?.detail?.value || 0)
   payerId.value = members.value[i]?.id || ""
+  if (payerId.value && !participantIds.value.includes(payerId.value)) participantIds.value = [...participantIds.value, payerId.value]
 }
 
 function onPickParticipants(e: any) {
@@ -128,6 +135,16 @@ function selectAll() {
 
 function selectNone() {
   participantIds.value = []
+}
+
+function applyQuick(x: number) {
+  const cur = Number(amountYuan.value || 0)
+  const next = Number.isFinite(cur) ? cur + x : x
+  amountYuan.value = String(next)
+}
+
+function clearAmount() {
+  amountYuan.value = ""
 }
 
 function toCents(input: string) {
@@ -149,10 +166,11 @@ function save() {
   if (!payerId.value) return uni.showToast({ title: "请选择付款人", icon: "none" })
   if (!participantIds.value.length) return uni.showToast({ title: "请选择参与人", icon: "none" })
 
+  const uniq = Array.from(new Set([payerId.value, ...participantIds.value])).filter(Boolean)
   const payload = {
     amountCents,
     payerId: payerId.value,
-    participantIds: participantIds.value,
+    participantIds: uniq,
     categoryId: categoryId.value,
     occurredAt: toISODate(dateValue.value),
     note: note.value.trim() || undefined,
@@ -177,6 +195,7 @@ onLoad((q: any) => {
   if (!categoryId.value) categoryId.value = categories.value[0]?.id || ""
   if (!payerId.value) payerId.value = members.value[0]?.id || ""
   if (!participantIds.value.length) participantIds.value = store.state.data.settings.defaultParticipantIds.slice()
+  if (payerId.value && !participantIds.value.includes(payerId.value)) participantIds.value = [...participantIds.value, payerId.value]
 
   if (!id.value) return
   const b = store.getBillById(id.value)
@@ -239,6 +258,38 @@ onLoad((q: any) => {
 
 .ph-amount {
   color: rgba(107, 114, 128, 0.55);
+}
+
+.quick {
+  margin-top: 12rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.q {
+  padding: 10rpx 14rpx;
+  border-radius: 999rpx;
+  background: var(--chip);
+  font-size: 22rpx;
+  color: var(--text);
+  font-weight: 900;
+}
+
+.q.ghost {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.count {
+  font-size: 22rpx;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.count-warn {
+  color: var(--danger);
 }
 
 .group {

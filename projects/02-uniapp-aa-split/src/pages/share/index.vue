@@ -1,0 +1,169 @@
+<template>
+  <view class="page">
+    <view class="card">
+      <text class="title">结算分享</text>
+      <text class="sub">{{ rangeText }}</text>
+    </view>
+
+    <view class="card">
+      <view class="actions">
+        <button class="ghost" size="mini" @click="refresh">刷新</button>
+        <button class="primary" size="mini" @click="copy">复制文本</button>
+      </view>
+      <textarea v-model="text" class="textarea" auto-height />
+    </view>
+
+    <view class="card">
+      <text class="title">说明</text>
+      <text class="sub">把“应收/应付”汇总复制到群里即可。若需要“最少转账次数”，后续可再升级算法。</text>
+    </view>
+  </view>
+</template>
+
+<script setup lang="ts">
+import { computed, ref } from "vue"
+import { onLoad } from "@dcloudio/uni-app"
+import { useAASplitStore } from "@/store/useAASplitStore"
+import { formatCents } from "@/utils/money"
+
+const store = useAASplitStore()
+
+const startISO = ref("")
+const endISO = ref("")
+const text = ref("")
+
+const rangeText = computed(() => {
+  const s = startISO.value.slice(0, 10)
+  const e = endISO.value.slice(0, 10)
+  if (!s || !e) return ""
+  return `${s} ~ ${e}`
+})
+
+const results = computed(() => {
+  if (!startISO.value || !endISO.value) return []
+  return store.settle({ startISO: startISO.value, endISO: endISO.value })
+})
+
+function buildText() {
+  const s = rangeText.value
+  const billsCount = store.state.data.bills.filter((b) => {
+    const t = new Date(b.occurredAt).getTime()
+    const ss = new Date(startISO.value).getTime()
+    const ee = new Date(endISO.value).getTime()
+    if (Number.isNaN(t) || Number.isNaN(ss) || Number.isNaN(ee)) return false
+    return t >= ss && t <= ee
+  }).length
+
+  const receive = results.value.filter((x) => x.receiveCents > 0)
+  const pay = results.value.filter((x) => x.payCents > 0)
+
+  const lines: string[] = []
+  lines.push(`【宿舍AA结算】${store.state.data.settings.defaultDormName}`)
+  if (s) lines.push(`范围：${s}`)
+  lines.push(`账单数：${billsCount}`)
+  lines.push("")
+
+  if (receive.length) {
+    lines.push("应收：")
+    for (const r of receive) lines.push(`- ${r.name} 应收 ¥${formatCents(r.receiveCents)}`)
+    lines.push("")
+  }
+
+  if (pay.length) {
+    lines.push("应付：")
+    for (const r of pay) lines.push(`- ${r.name} 应付 ¥${formatCents(r.payCents)}`)
+    lines.push("")
+  }
+
+  if (!receive.length && !pay.length) lines.push("本次结算无人应收/应付（已平）")
+
+  return lines.join("\n")
+}
+
+function refresh() {
+  text.value = buildText()
+}
+
+function copy() {
+  if (!text.value) refresh()
+  uni.setClipboardData({
+    data: text.value,
+    success() {
+      uni.showToast({ title: "已复制", icon: "success" })
+    },
+  })
+}
+
+onLoad((q: any) => {
+  startISO.value = String(q?.start || "")
+  endISO.value = String(q?.end || "")
+  refresh()
+})
+</script>
+
+<style scoped>
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 18rpx 24rpx 24rpx;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 28rpx;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-bottom: 14rpx;
+}
+
+.title {
+  font-size: 30rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.sub {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.primary {
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: 999rpx;
+  height: 68rpx;
+  font-weight: 900;
+}
+
+.ghost {
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999rpx;
+  height: 68rpx;
+  font-weight: 900;
+  border: 1px solid var(--border);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 260rpx;
+  padding: 14rpx 16rpx;
+  background: var(--surface);
+  border-radius: 18rpx;
+  font-size: 24rpx;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+</style>
+

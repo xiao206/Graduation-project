@@ -1,8 +1,13 @@
 <template>
   <view class="page">
     <view class="hero">
-      <text class="title">结算结果</text>
-      <text class="sub">{{ rangeText }}</text>
+      <view class="hero-head">
+        <view class="hero-left">
+          <text class="title">结算结果</text>
+          <text class="sub">{{ rangeText }}</text>
+        </view>
+        <button class="share" size="mini" @click="goShare">分享</button>
+      </view>
 
       <view v-if="results.length > 0" class="summary">
         <view class="s-item">
@@ -112,6 +117,11 @@ const rangeText = computed(() => {
   return `${s} ~ ${e}`
 })
 
+function goShare() {
+  if (!startISO.value || !endISO.value) return
+  uni.navigateTo({ url: `/pages/share/index?start=${encodeURIComponent(startISO.value)}&end=${encodeURIComponent(endISO.value)}` })
+}
+
 onLoad((q: any) => {
   startISO.value = String(q?.start || "")
   endISO.value = String(q?.end || "")
@@ -145,6 +155,27 @@ onLoad((q: any) => {
   margin-top: 10rpx;
   font-size: 24rpx;
   color: var(--muted);
+}
+
+.hero-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.share {
+  height: 68rpx;
+  border-radius: 999rpx;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 900;
 }
 
 .summary {

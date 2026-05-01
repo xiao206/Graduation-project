@@ -43,6 +43,12 @@
       }
     },
     {
+      "path": "pages/share/index",
+      "style": {
+        "navigationBarTitleText": "结算分享"
+      }
+    },
+    {
       "path": "pages/categories/index",
       "style": {
         "navigationBarTitleText": "分类管理"

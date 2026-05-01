@@ -19,6 +19,17 @@
       </view>
     </view>
 
+    <view class="summary">
+      <view class="summary-card">
+        <text class="summary-k">本月合计</text>
+        <text class="summary-v">¥{{ formatCents(monthTotal) }}</text>
+      </view>
+      <view class="summary-card">
+        <text class="summary-k">筛选结果</text>
+        <text class="summary-v">{{ filteredCount }} 笔</text>
+      </view>
+    </view>
+
     <view v-if="groups.length === 0" class="empty">
       <text class="empty-title">本月还没有账单</text>
       <text class="empty-sub">新增一笔后，这里会按发生日期整理</text>
@@ -85,6 +96,9 @@ const filtered = computed(() => {
     return `${c} ${note} ${payer} ${parts}`.toLowerCase().includes(q)
   })
 })
+
+const monthTotal = computed(() => store.listBillsByMonth(monthKey.value).reduce((s, b) => s + b.amountCents, 0))
+const filteredCount = computed(() => filtered.value.length)
 
 const groups = computed(() => {
   const raw = store.groupBillsByDate(filtered.value)
@@ -184,6 +198,35 @@ function goAdd() {
 
 .scroll {
   height: calc(100vh - 190rpx);
+}
+
+.summary {
+  padding: 0 24rpx 6rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12rpx;
+}
+
+.summary-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.summary-k {
+  font-size: 22rpx;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.summary-v {
+  font-size: 30rpx;
+  color: var(--text);
+  font-weight: 900;
 }
 
 .group {
