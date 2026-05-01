@@ -6,21 +6,24 @@ onLaunch(() => {})
 </script>
 <style lang="scss">
 page {
-  --bg: #f7f8fa;
-  --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: rgba(226, 232, 240, 0.9);
-  --shadow: 0 10rpx 28rpx rgba(15, 23, 42, 0.06);
-  --radius: 18rpx;
-  --radius-lg: 22rpx;
-  --primary: #111827;
-  --primary-ghost: rgba(15, 23, 42, 0.06);
+  --bg: radial-gradient(1200rpx 820rpx at 10% 0%, rgba(15, 118, 110, 0.16), transparent 58%),
+    radial-gradient(980rpx 720rpx at 95% 18%, rgba(245, 158, 11, 0.16), transparent 62%), #faf6ed;
+  --card: rgba(255, 253, 247, 0.94);
+  --text: #2b1d0e;
+  --muted: #7a6756;
+  --border: rgba(231, 220, 203, 0.95);
+  --shadow: 0 14rpx 38rpx rgba(43, 29, 14, 0.11);
+  --radius: 22rpx;
+  --radius-lg: 26rpx;
+  --primary: #0f766e;
+  --primary-ghost: rgba(15, 118, 110, 0.13);
 
   background: var(--bg);
   color: var(--text);
   font-size: 28rpx;
-  line-height: 1.5;
+  line-height: 1.55;
+  letter-spacing: 0.2px;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
 }
 
 view,
