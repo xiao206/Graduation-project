@@ -188,7 +188,7 @@ function goDetail(id: string) {
   height: 76rpx;
   border-radius: 999rpx;
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
@@ -198,7 +198,7 @@ function goDetail(id: string) {
 .toggle {
   margin-top: 16rpx;
   background: var(--chip);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
@@ -233,7 +233,7 @@ function goDetail(id: string) {
 
 .kpi-item {
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   padding: 16rpx;
   box-shadow: var(--shadow-sm);
@@ -256,16 +256,16 @@ function goDetail(id: string) {
 
 .btn-primary {
   margin-top: 14rpx;
-  height: 90rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   background: var(--primary);
   color: #ffffff;
   font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.28);
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.22);
 }
 
 .btn-inner {
-  height: 90rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   display: flex;
   align-items: center;
@@ -306,7 +306,7 @@ function goDetail(id: string) {
 
 .empty {
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   padding: 28rpx;
   box-shadow: var(--shadow-sm);
@@ -332,7 +332,7 @@ function goDetail(id: string) {
 
 .list {
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -343,7 +343,7 @@ function goDetail(id: string) {
   align-items: flex-start;
   gap: 14rpx;
   padding: 18rpx 18rpx;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .cell:last-child {

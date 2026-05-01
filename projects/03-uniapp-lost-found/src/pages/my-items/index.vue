@@ -22,15 +22,15 @@
       <text class="title">未登录</text>
       <text class="sub">登录后才能查看和管理你的发布</text>
       <view class="actions">
-        <button class="primary" @click="goLogin">去登录</button>
-        <button class="ghost" @click="goRegister">去注册</button>
+        <button class="wx-btn-primary" @click="goLogin">去登录</button>
+        <button class="wx-btn-ghost" @click="goRegister">去注册</button>
       </view>
     </view>
 
     <view v-else-if="filtered.length === 0" class="card">
       <text class="title">还没有发布</text>
       <text class="sub">发布一条寻物或招领信息，方便同学联系你</text>
-      <button class="primary" @click="goPublish">
+      <button class="wx-btn-primary" @click="goPublish">
         <view class="btn-inner">
           <uni-icons type="plus" size="18" color="#ffffff" />
           <text>去发布</text>
@@ -133,7 +133,7 @@ function goRegister() {
 
 .toggle {
   background: var(--chip);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
@@ -160,11 +160,11 @@ function goRegister() {
 }
 
 .search-wrap {
-  height: 76rpx;
+  height: var(--input-h);
   padding: 0 16rpx;
   background: var(--card);
   border-radius: 999rpx;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
@@ -173,7 +173,7 @@ function goRegister() {
 
 .search {
   flex: 1;
-  height: 76rpx;
+  height: var(--input-h);
   padding: 0;
   background: transparent;
   font-size: 26rpx;
@@ -186,10 +186,10 @@ function goRegister() {
 
 .card {
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
 }
 
 .title {
@@ -212,28 +212,8 @@ function goRegister() {
   gap: 12rpx;
 }
 
-.primary {
-  flex: 1;
-  height: 90rpx;
-  border-radius: 999rpx;
-  background: var(--primary);
-  color: #ffffff;
-  font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.22);
-}
-
-.ghost {
-  flex: 1;
-  height: 90rpx;
-  border-radius: 999rpx;
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  font-weight: 900;
-}
-
 .btn-inner {
-  height: 90rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   display: flex;
   align-items: center;
@@ -251,7 +231,7 @@ function goRegister() {
 .cell {
   margin-top: 12rpx;
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-lg);
   padding: 18rpx 18rpx;
@@ -340,4 +320,3 @@ function goRegister() {
   color: var(--muted);
 }
 </style>
-

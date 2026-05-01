@@ -10,15 +10,15 @@
 
       <view class="block">
         <text class="k">用户名</text>
-        <input v-model="username" class="input" placeholder="请输入用户名" placeholder-class="ph" />
+        <input v-model="username" class="wx-input" placeholder="请输入用户名" placeholder-class="ph" />
       </view>
 
       <view class="block">
         <text class="k">密码</text>
-        <input v-model="password" class="input" password placeholder="请输入密码" placeholder-class="ph" />
+        <input v-model="password" class="wx-input" password placeholder="请输入密码" placeholder-class="ph" />
       </view>
 
-      <button class="primary" @click="submit">
+      <button class="wx-btn-primary" @click="submit">
         <view class="btn-inner">
           <uni-icons type="checkbox-filled" size="18" color="#ffffff" />
           <text>登录</text>
@@ -63,8 +63,8 @@ function goRegister() {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
 }
 
 .title {
@@ -122,21 +122,11 @@ function goRegister() {
 }
 
 .ph {
-  color: rgba(17, 24, 39, 0.45);
-}
-
-.primary {
-  margin-top: 18rpx;
-  height: 90rpx;
-  border-radius: 999rpx;
-  background: var(--primary);
-  color: #ffffff;
-  font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+  color: rgba(100, 116, 139, 0.78);
 }
 
 .btn-inner {
-  height: 90rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   display: flex;
   align-items: center;

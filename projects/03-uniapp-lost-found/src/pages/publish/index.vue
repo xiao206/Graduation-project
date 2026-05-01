@@ -4,8 +4,8 @@
       <text class="gate-title">先登录再发布</text>
       <text class="gate-sub">发布信息需要账号，用于管理你发布的内容</text>
       <view class="gate-actions">
-        <button class="ghost" @click="goLogin">去登录</button>
-        <button class="primary" @click="goRegister">去注册</button>
+        <button class="wx-btn-ghost" @click="goLogin">去登录</button>
+        <button class="wx-btn-primary" @click="goRegister">去注册</button>
       </view>
     </view>
 
@@ -23,7 +23,7 @@
 
       <view class="block">
         <text class="k">标题</text>
-        <input v-model="title" class="input" placeholder="例如：丢失校园卡 / 捡到钥匙串" placeholder-class="ph" />
+        <input v-model="title" class="wx-input" placeholder="例如：丢失校园卡 / 捡到钥匙串" placeholder-class="ph" />
       </view>
 
       <view class="block">
@@ -38,7 +38,7 @@
 
       <view class="block">
         <text class="k">地点</text>
-        <input v-model="location" class="input" placeholder="例如：一食堂 / 图书馆 / 操场" placeholder-class="ph" />
+        <input v-model="location" class="wx-input" placeholder="例如：一食堂 / 图书馆 / 操场" placeholder-class="ph" />
       </view>
 
       <view class="block">
@@ -53,15 +53,15 @@
 
       <view class="block">
         <text class="k">联系方式</text>
-        <input v-model="contact" class="input" placeholder="微信/QQ/手机号（可选）" placeholder-class="ph" />
+        <input v-model="contact" class="wx-input" placeholder="微信/QQ/手机号（可选）" placeholder-class="ph" />
       </view>
 
       <view class="block">
         <text class="k">描述</text>
-        <textarea v-model="description" class="textarea" placeholder="补充特征、颜色、备注（可选）" placeholder-class="ph" />
+        <textarea v-model="description" class="wx-textarea" placeholder="补充特征、颜色、备注（可选）" placeholder-class="ph" />
       </view>
 
-      <button class="primary" @click="save">
+      <button class="wx-btn-primary" @click="save">
         <view class="btn-inner">
           <uni-icons type="paperplane-filled" size="18" color="#ffffff" />
           <text>发布</text>
@@ -153,7 +153,7 @@ onShow(() => {})
 
 .gate {
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   padding: 28rpx;
   box-shadow: var(--shadow-sm);
@@ -179,22 +179,12 @@ onShow(() => {})
   gap: 12rpx;
 }
 
-.ghost {
-  flex: 1;
-  height: 86rpx;
-  border-radius: 999rpx;
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-  font-weight: 900;
-}
-
 .card {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
 }
 
 .title {
@@ -206,7 +196,7 @@ onShow(() => {})
 .type-toggle {
   margin-top: 14rpx;
   background: var(--chip);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
@@ -245,32 +235,12 @@ onShow(() => {})
   font-weight: 800;
 }
 
-.input {
-  height: 76rpx;
-  padding: 0 16rpx;
-  background: var(--surface);
-  border-radius: 18rpx;
-  border: 1px solid var(--border);
-  font-size: 26rpx;
-  color: var(--text);
-}
-
-.textarea {
-  min-height: 160rpx;
-  padding: 16rpx 16rpx;
-  background: var(--surface);
-  border-radius: 18rpx;
-  border: 1px solid var(--border);
-  font-size: 26rpx;
-  color: var(--text);
-}
-
 .ph {
-  color: rgba(17, 24, 39, 0.45);
+  color: rgba(100, 116, 139, 0.78);
 }
 
 .picker {
-  height: 76rpx;
+  height: var(--input-h);
   padding: 0 16rpx;
   background: var(--surface);
   border-radius: 18rpx;
@@ -278,7 +248,7 @@ onShow(() => {})
   align-items: center;
   justify-content: space-between;
   gap: 12rpx;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-soft);
 }
 
 .picker-text {
@@ -287,18 +257,8 @@ onShow(() => {})
   font-weight: 800;
 }
 
-.primary {
-  margin-top: 16rpx;
-  height: 90rpx;
-  border-radius: 999rpx;
-  background: var(--primary);
-  color: #ffffff;
-  font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.28);
-}
-
 .btn-inner {
-  height: 90rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   display: flex;
   align-items: center;

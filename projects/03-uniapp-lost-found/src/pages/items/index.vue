@@ -124,7 +124,7 @@ function goPublish() {
 .toggle {
   flex: 1;
   background: var(--chip);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
@@ -151,11 +151,11 @@ function goPublish() {
 }
 
 .search-wrap {
-  height: 76rpx;
+  height: var(--input-h);
   padding: 0 16rpx;
   background: var(--card);
   border-radius: 999rpx;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
@@ -164,7 +164,7 @@ function goPublish() {
 
 .search {
   flex: 1;
-  height: 76rpx;
+  height: var(--input-h);
   padding: 0;
   background: transparent;
   font-size: 26rpx;
@@ -172,7 +172,7 @@ function goPublish() {
 }
 
 .ph {
-  color: rgba(107, 114, 128, 0.7);
+  color: rgba(100, 116, 139, 0.78);
 }
 
 .summary {
@@ -184,7 +184,7 @@ function goPublish() {
 
 .summary-card {
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   padding: 16rpx 16rpx;
   box-shadow: var(--shadow-sm);
@@ -213,8 +213,8 @@ function goPublish() {
   display: flex;
   flex-direction: column;
   gap: 14rpx;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
 }
 
 .empty-title {
@@ -233,8 +233,9 @@ function goPublish() {
   background: var(--primary);
   color: #ffffff;
   border-radius: 999rpx;
-  height: 76rpx;
+  height: var(--btn-h);
   font-weight: 900;
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.22);
 }
 
 .scroll {
@@ -246,7 +247,7 @@ function goPublish() {
 .cell {
   margin-top: 12rpx;
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-lg);
   padding: 18rpx 18rpx;
@@ -338,11 +339,12 @@ function goPublish() {
 
 .tail-btn {
   margin-top: 4rpx;
-  height: 76rpx;
+  height: var(--btn-h);
   padding: 0 26rpx;
   border-radius: 999rpx;
   background: var(--primary);
   color: #ffffff;
   font-weight: 900;
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.18);
 }
 </style>

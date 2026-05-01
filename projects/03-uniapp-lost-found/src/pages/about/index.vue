@@ -42,8 +42,8 @@ const version = (pkg as any)?.version || "0.0.0"
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 24rpx;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
 }
 
 .head {
@@ -93,7 +93,7 @@ const version = (pkg as any)?.version || "0.0.0"
   align-items: center;
   justify-content: space-between;
   padding: 14rpx 0;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .row:last-child {

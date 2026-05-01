@@ -28,51 +28,51 @@
 
     <view class="card">
       <text class="card-title">管理</text>
-      <view class="list">
-        <view class="cell" @click="goMyItems">
-          <view class="cell-left">
-            <view class="cell-icon">
+      <view class="wx-group">
+        <view class="wx-cell" @click="goMyItems">
+          <view class="wx-cell-left">
+            <view class="wx-cell-icon">
               <uni-icons type="folder-filled" size="20" color="var(--text)" />
             </view>
-            <view class="cell-meta">
-              <text class="cell-title">我的发布</text>
-              <text class="cell-sub">查看/筛选/管理状态</text>
+            <view class="wx-cell-meta">
+              <text class="wx-cell-title">我的发布</text>
+              <text class="wx-cell-sub">查看/筛选/管理状态</text>
             </view>
           </view>
           <uni-icons type="forward" size="16" color="#94A3B8" />
         </view>
-        <view class="cell" @click="goCategories">
-          <view class="cell-left">
-            <view class="cell-icon">
+        <view class="wx-cell" @click="goCategories">
+          <view class="wx-cell-left">
+            <view class="wx-cell-icon">
               <uni-icons type="list" size="20" color="var(--text)" />
             </view>
-            <view class="cell-meta">
-              <text class="cell-title">分类管理</text>
-              <text class="cell-sub">证件/电子产品等</text>
+            <view class="wx-cell-meta">
+              <text class="wx-cell-title">分类管理</text>
+              <text class="wx-cell-sub">证件/电子产品等</text>
             </view>
           </view>
           <uni-icons type="forward" size="16" color="#94A3B8" />
         </view>
-        <view class="cell" @click="goHelp">
-          <view class="cell-left">
-            <view class="cell-icon">
+        <view class="wx-cell" @click="goHelp">
+          <view class="wx-cell-left">
+            <view class="wx-cell-icon">
               <uni-icons type="help-filled" size="20" color="var(--text)" />
             </view>
-            <view class="cell-meta">
-              <text class="cell-title">帮助</text>
-              <text class="cell-sub">使用说明与常见问题</text>
+            <view class="wx-cell-meta">
+              <text class="wx-cell-title">帮助</text>
+              <text class="wx-cell-sub">使用说明与常见问题</text>
             </view>
           </view>
           <uni-icons type="forward" size="16" color="#94A3B8" />
         </view>
-        <view class="cell" @click="goAbout">
-          <view class="cell-left">
-            <view class="cell-icon">
+        <view class="wx-cell" @click="goAbout">
+          <view class="wx-cell-left">
+            <view class="wx-cell-icon">
               <uni-icons type="info-filled" size="20" color="var(--text)" />
             </view>
-            <view class="cell-meta">
-              <text class="cell-title">关于</text>
-              <text class="cell-sub">项目说明</text>
+            <view class="wx-cell-meta">
+              <text class="wx-cell-title">关于</text>
+              <text class="wx-cell-sub">项目说明</text>
             </view>
           </view>
           <uni-icons type="forward" size="16" color="#94A3B8" />
@@ -144,8 +144,8 @@ onShow(() => {
 }
 
 .hero {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.06));
-  border: 1px solid rgba(37, 99, 235, 0.16);
+  background: linear-gradient(135deg, rgba(47, 107, 255, 0.18), rgba(47, 107, 255, 0.06));
+  border: 1px solid rgba(47, 107, 255, 0.16);
   border-radius: var(--radius-lg);
   padding: 22rpx;
   box-shadow: var(--shadow);
@@ -165,7 +165,7 @@ onShow(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.22);
 }
 
 .hero-meta {
@@ -195,17 +195,17 @@ onShow(() => {
 
 .primary {
   flex: 1;
-  height: 86rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   background: var(--primary);
   color: #ffffff;
   font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.22);
 }
 
 .ghost {
   flex: 1;
-  height: 86rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   background: var(--surface);
   color: var(--text);
@@ -241,11 +241,11 @@ onShow(() => {
 }
 
 .input {
-  height: 76rpx;
+  height: var(--input-h);
   padding: 0 16rpx;
   background: var(--surface);
   border-radius: 18rpx;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-soft);
   font-size: 26rpx;
   color: var(--text);
 }
@@ -259,54 +259,4 @@ onShow(() => {
   margin-top: 14rpx;
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-}
-
-.cell {
-  padding: 18rpx 4rpx;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.cell:last-child {
-  border-bottom: none;
-}
-
-.cell-left {
-  display: flex;
-  align-items: center;
-  gap: 14rpx;
-}
-
-.cell-icon {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: var(--radius);
-  background: rgba(17, 24, 39, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cell-meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.cell-title {
-  font-size: 28rpx;
-  font-weight: 900;
-  color: var(--text);
-}
-
-.cell-sub {
-  display: block;
-  margin-top: 6rpx;
-  font-size: 22rpx;
-  color: var(--muted);
-}
 </style>

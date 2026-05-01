@@ -34,7 +34,7 @@
           <text class="pill-v">{{ myOpen }}</text>
         </view>
       </view>
-      <button class="primary" @click="goPublish">
+      <button class="wx-btn-primary" @click="goPublish">
         <view class="btn-inner">
           <uni-icons type="plus" size="18" color="#ffffff" />
           <text>发布一条</text>
@@ -117,7 +117,8 @@ function goPublish() {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 16rpx;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 8rpx;
@@ -139,8 +140,8 @@ function goPublish() {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 14rpx;
 }
 
@@ -170,7 +171,7 @@ function goPublish() {
 .pill {
   flex: 1;
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-soft);
   border-radius: 18rpx;
   padding: 14rpx;
   display: flex;
@@ -190,18 +191,8 @@ function goPublish() {
   color: var(--text);
 }
 
-.primary {
-  margin-top: 14rpx;
-  height: 90rpx;
-  border-radius: 999rpx;
-  background: var(--primary);
-  color: #ffffff;
-  font-weight: 900;
-  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
-}
-
 .btn-inner {
-  height: 90rpx;
+  height: var(--btn-h);
   border-radius: 999rpx;
   display: flex;
   align-items: center;
@@ -250,4 +241,3 @@ function goPublish() {
   color: var(--muted);
 }
 </style>
-

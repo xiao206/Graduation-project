@@ -64,10 +64,10 @@
 
 .card {
   background: var(--card);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   padding: 24rpx;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
 }
 
 .title {
@@ -138,4 +138,3 @@
   line-height: 1.7;
 }
 </style>
-

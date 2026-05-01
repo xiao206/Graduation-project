@@ -3,25 +3,25 @@
     <view class="card">
       <text class="title">新增分类</text>
       <view class="form">
-        <input v-model="name" class="input" placeholder="分类名称" placeholder-class="ph" />
+        <input v-model="name" class="wx-input" placeholder="分类名称" placeholder-class="ph" />
         <view class="colors">
           <view v-for="c in colors" :key="c" class="color" :class="color === c ? 'color-active' : ''" :style="{ backgroundColor: c }" @click="color = c" />
         </view>
-        <button class="primary" size="mini" @click="add">添加</button>
+        <button class="wx-btn-primary" @click="add">添加分类</button>
       </view>
     </view>
 
     <view class="card">
       <text class="title">现有分类</text>
-      <view class="list">
-        <view v-for="c in list" :key="c.id" class="row">
-          <view class="left">
+      <view class="wx-group list">
+        <view v-for="c in list" :key="c.id" class="wx-cell">
+          <view class="wx-cell-left">
             <view class="icon" :style="{ backgroundColor: c.color || '#E5E7EB' }">
-              <uni-icons type="tag-filled" size="22" color="#FFFFFF" />
+              <uni-icons type="tag-filled" size="18" color="#FFFFFF" />
             </view>
-            <view class="meta">
-              <text class="row-name">{{ c.name }}</text>
-              <text class="row-sub">{{ c.id }}</text>
+            <view class="wx-cell-meta">
+              <text class="wx-cell-title">{{ c.name }}</text>
+              <text class="wx-cell-sub">{{ c.id }}</text>
             </view>
           </view>
           <switch :checked="c.enabled" @change="(e) => onSwitch(c.id, e)" />
@@ -42,7 +42,7 @@ const store = useLostFoundStore()
 const list = computed(() => store.state.data.categories.slice().sort((a, b) => a.order - b.order))
 
 const name = ref("")
-const colors = ["#2563EB", "#7C3AED", "#F97316", "#DB2777", "#0EA5E9", "#64748B"]
+const colors = ["#2F6BFF", "#7C3AED", "#F97316", "#DB2777", "#0EA5E9", "#64748B"]
 const color = ref(colors[0])
 
 function add() {
@@ -81,8 +81,8 @@ function onSwitch(id: string, e: any) {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 28rpx;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 14rpx;
 }
 
@@ -99,18 +99,8 @@ function onSwitch(id: string, e: any) {
   gap: 12rpx;
 }
 
-.input {
-  height: 76rpx;
-  padding: 0 16rpx;
-  background: var(--primary-ghost);
-  border-radius: var(--radius);
-  font-size: 26rpx;
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
 .ph {
-  color: #94a3b8;
+  color: rgba(100, 116, 139, 0.78);
 }
 
 .colors {
@@ -131,64 +121,17 @@ function onSwitch(id: string, e: any) {
   transform: scale(1.12);
 }
 
-.primary {
-  background: var(--primary);
-  color: #ffffff;
-  border-radius: var(--radius);
-}
-
 .list {
   margin-top: 14rpx;
-  display: flex;
-  flex-direction: column;
-}
-
-.row {
-  padding: 16rpx 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
-}
-
-.row:last-child {
-  border-bottom: none;
-}
-
-.left {
-  display: flex;
-  align-items: center;
-  gap: 14rpx;
 }
 
 .icon {
-  width: 72rpx;
-  height: 72rpx;
+  width: 64rpx;
+  height: 64rpx;
   border-radius: 999rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border);
-}
-
-.icon-text {
-  font-size: 34rpx;
-}
-
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6rpx;
-}
-
-.row-name {
-  font-size: 28rpx;
-  font-weight: 800;
-  color: var(--text);
-}
-
-.row-sub {
-  font-size: 20rpx;
-  color: var(--muted);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 </style>
