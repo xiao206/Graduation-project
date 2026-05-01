@@ -29,6 +29,18 @@
     <view class="card">
       <text class="card-title">管理</text>
       <view class="list">
+        <view class="cell" @click="goMyItems">
+          <view class="cell-left">
+            <view class="cell-icon">
+              <uni-icons type="folder-filled" size="20" color="var(--text)" />
+            </view>
+            <view class="cell-meta">
+              <text class="cell-title">我的发布</text>
+              <text class="cell-sub">查看/筛选/管理状态</text>
+            </view>
+          </view>
+          <uni-icons type="forward" size="16" color="#94A3B8" />
+        </view>
         <view class="cell" @click="goCategories">
           <view class="cell-left">
             <view class="cell-icon">
@@ -37,6 +49,18 @@
             <view class="cell-meta">
               <text class="cell-title">分类管理</text>
               <text class="cell-sub">证件/电子产品等</text>
+            </view>
+          </view>
+          <uni-icons type="forward" size="16" color="#94A3B8" />
+        </view>
+        <view class="cell" @click="goHelp">
+          <view class="cell-left">
+            <view class="cell-icon">
+              <uni-icons type="help-filled" size="20" color="var(--text)" />
+            </view>
+            <view class="cell-meta">
+              <text class="cell-title">帮助</text>
+              <text class="cell-sub">使用说明与常见问题</text>
             </view>
           </view>
           <uni-icons type="forward" size="16" color="#94A3B8" />
@@ -90,6 +114,14 @@ function logout() {
 
 function goCategories() {
   uni.navigateTo({ url: "/pages/categories/index" })
+}
+
+function goMyItems() {
+  uni.navigateTo({ url: "/pages/my-items/index" })
+}
+
+function goHelp() {
+  uni.navigateTo({ url: "/pages/help/index" })
 }
 
 function goAbout() {
