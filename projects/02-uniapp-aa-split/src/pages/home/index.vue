@@ -37,8 +37,18 @@
       </view>
 
       <view class="actions">
-        <button class="btn-primary" @click="goAdd">新增账单</button>
-        <button class="btn-ghost" @click="goSettle">生成结算</button>
+        <button class="btn-primary" @click="goAdd">
+          <view class="btn-inner">
+            <uni-icons type="plus" size="18" color="#ffffff" />
+            <text>新增账单</text>
+          </view>
+        </button>
+        <button class="btn-ghost" @click="goSettle">
+          <view class="btn-inner">
+            <uni-icons type="chart" size="18" color="var(--primary)" />
+            <text>生成结算</text>
+          </view>
+        </button>
       </view>
     </view>
 
@@ -237,10 +247,19 @@ function goDetail(id: string) {
   flex: 1;
   height: 86rpx;
   border-radius: 999rpx;
-  background: var(--card);
+  background: var(--surface);
   color: var(--text);
   border: 1px solid var(--border);
   font-weight: 900;
+}
+
+.btn-inner {
+  height: 86rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
 }
 
 .wide {

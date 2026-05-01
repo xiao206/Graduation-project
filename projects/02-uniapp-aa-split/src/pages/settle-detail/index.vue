@@ -6,7 +6,10 @@
           <text class="title">结算结果</text>
           <text class="sub">{{ rangeText }}</text>
         </view>
-        <button class="share" size="mini" @click="goShare">分享</button>
+        <view class="share" @click="goShare">
+          <uni-icons type="paperplane" size="16" color="var(--text)" />
+          <text class="share-text">分享</text>
+        </view>
       </view>
 
       <view v-if="results.length > 0" class="summary">
@@ -170,12 +173,21 @@ onLoad((q: any) => {
 }
 
 .share {
-  height: 68rpx;
+  height: 72rpx;
+  padding: 0 18rpx;
   border-radius: 999rpx;
   background: var(--surface);
   border: 1px solid var(--border);
-  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
   font-weight: 900;
+}
+
+.share-text {
+  font-size: 24rpx;
+  color: var(--text);
 }
 
 .summary {

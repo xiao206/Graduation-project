@@ -7,8 +7,18 @@
 
     <view class="card">
       <view class="actions">
-        <button class="ghost" size="mini" @click="refresh">刷新</button>
-        <button class="primary" size="mini" @click="copy">复制文本</button>
+        <button class="ghost" @click="refresh">
+          <view class="btn-inner">
+            <uni-icons type="refresh" size="18" color="var(--text)" />
+            <text>刷新</text>
+          </view>
+        </button>
+        <button class="primary" @click="copy">
+          <view class="btn-inner">
+            <uni-icons type="paperclip" size="18" color="#ffffff" />
+            <text>复制文本</text>
+          </view>
+        </button>
       </view>
       <textarea v-model="text" class="textarea" auto-height />
     </view>
@@ -133,25 +143,37 @@ onLoad((q: any) => {
 
 .actions {
   display: flex;
-  justify-content: flex-end;
   gap: 12rpx;
   margin-bottom: 12rpx;
+}
+
+.actions button {
+  flex: 1;
+}
+
+.btn-inner {
+  height: 84rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  font-weight: 900;
 }
 
 .primary {
   background: var(--primary);
   color: #ffffff;
   border-radius: 999rpx;
-  height: 68rpx;
-  font-weight: 900;
+  height: 84rpx;
+  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
 }
 
 .ghost {
   background: var(--surface);
   color: var(--text);
   border-radius: 999rpx;
-  height: 68rpx;
-  font-weight: 900;
+  height: 84rpx;
   border: 1px solid var(--border);
 }
 
@@ -166,4 +188,3 @@ onLoad((q: any) => {
   border: 1px solid var(--border);
 }
 </style>
-
