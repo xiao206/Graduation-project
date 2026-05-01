@@ -4,6 +4,7 @@
 
 - 01｜记账小程序｜UniApp(Vue3)+TS｜[projects/01-uniapp-ledger](file:///workspace/projects/01-uniapp-ledger/README.md)
 - 02｜宿舍AA分摊助手｜UniApp(Vue3)+TS｜[projects/02-uniapp-aa-split](file:///workspace/projects/02-uniapp-aa-split/README.md)
+- 03｜校园失物招领助手｜UniApp(Vue3)+TS｜[projects/03-uniapp-lost-found](file:///workspace/projects/03-uniapp-lost-found/README.md)
 
 ## 命名建议
 
