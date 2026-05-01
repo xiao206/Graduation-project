@@ -9,13 +9,13 @@
       <view class="actions">
         <button class="ghost" @click="refresh">
           <view class="btn-inner">
-            <uni-icons type="refresh" size="18" color="var(--text)" />
+            <uni-icons type="refresh" size="20" color="var(--text)" />
             <text>刷新</text>
           </view>
         </button>
         <button class="primary" @click="copy">
           <view class="btn-inner">
-            <uni-icons type="paperclip" size="18" color="#ffffff" />
+            <uni-icons type="paperclip" size="20" color="#ffffff" />
             <text>复制文本</text>
           </view>
         </button>

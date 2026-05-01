@@ -38,7 +38,12 @@
         </picker>
       </view>
 
-      <button class="primary" @click="goDetail">生成结算</button>
+      <button class="primary" @click="goDetail">
+        <view class="btn-inner">
+          <uni-icons type="chart" size="20" color="#ffffff" />
+          <text>生成结算</text>
+        </view>
+      </button>
     </view>
 
     <view class="card">
@@ -193,5 +198,15 @@ function goDetail() {
   color: #ffffff;
   font-weight: 900;
   box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+}
+
+.btn-inner {
+  height: 90rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  font-size: 30rpx;
 }
 </style>

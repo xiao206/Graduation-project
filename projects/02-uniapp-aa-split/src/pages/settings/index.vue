@@ -30,15 +30,21 @@
       <text class="title">快捷操作</text>
       <view class="quick">
         <view class="quick-btn primary" @click="goAdd">
-          <uni-icons type="plus" size="18" color="#ffffff" />
+          <view class="quick-icon primary-icon">
+            <uni-icons type="plus" size="24" color="#ffffff" />
+          </view>
           <text class="quick-text">新增账单</text>
         </view>
         <view class="quick-btn" @click="goSettle">
-          <uni-icons type="chart" size="18" color="var(--primary)" />
+          <view class="quick-icon">
+            <uni-icons type="chart" size="24" color="var(--primary)" />
+          </view>
           <text class="quick-text">生成结算</text>
         </view>
         <view class="quick-btn" @click="go('/pages/data/index')">
-          <uni-icons type="download" size="18" color="var(--primary)" />
+          <view class="quick-icon">
+            <uni-icons type="download" size="24" color="var(--primary)" />
+          </view>
           <text class="quick-text">数据备份</text>
         </view>
       </view>
@@ -247,7 +253,7 @@ function saveDorm() {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 18rpx;
-  padding: 16rpx 12rpx;
+  padding: 18rpx 12rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -262,6 +268,20 @@ function saveDorm() {
 
 .quick-btn.primary .quick-text {
   color: #ffffff;
+}
+
+.quick-icon {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 16rpx;
+  background: rgba(37, 99, 235, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-icon {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .quick-text {

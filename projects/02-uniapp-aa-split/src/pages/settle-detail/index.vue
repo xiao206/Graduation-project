@@ -7,7 +7,7 @@
           <text class="sub">{{ rangeText }}</text>
         </view>
         <view class="share" @click="goShare">
-          <uni-icons type="paperplane" size="16" color="var(--text)" />
+          <uni-icons type="paperplane" size="18" color="var(--text)" />
           <text class="share-text">分享</text>
         </view>
       </view>

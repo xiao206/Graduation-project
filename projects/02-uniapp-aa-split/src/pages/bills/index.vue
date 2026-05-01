@@ -10,7 +10,7 @@
           </view>
         </picker>
         <view class="add" @click="goAdd">
-          <uni-icons type="plus" size="18" color="#ffffff" />
+          <uni-icons type="plus" size="22" color="#ffffff" />
         </view>
       </view>
       <view class="search-wrap">
