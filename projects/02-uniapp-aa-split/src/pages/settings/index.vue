@@ -37,7 +37,7 @@
         </view>
         <view class="quick-btn" @click="goSettle">
           <view class="quick-icon">
-            <uni-icons type="chart" size="24" color="var(--primary)" />
+            <uni-icons type="bars" size="24" color="var(--primary)" />
           </view>
           <text class="quick-text">生成结算</text>
         </view>

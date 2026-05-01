@@ -40,7 +40,7 @@
 
       <button class="primary" @click="goDetail">
         <view class="btn-inner">
-          <uni-icons type="chart" size="20" color="#ffffff" />
+          <uni-icons type="bars" size="20" color="#ffffff" />
           <text>生成结算</text>
         </view>
       </button>

@@ -45,7 +45,7 @@
         </button>
         <button class="btn-ghost" @click="goSettle">
           <view class="btn-inner">
-            <uni-icons type="chart" size="18" color="var(--primary)" />
+            <uni-icons type="bars" size="18" color="var(--primary)" />
             <text>生成结算</text>
           </view>
         </button>
