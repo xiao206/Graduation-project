@@ -1,34 +1,53 @@
 <template>
   <view class="page">
-    <view class="card">
-      <text class="title">登录</text>
-      <text class="sub">本地账号，仅用于本机管理你发布的信息</text>
-      <view class="hint">
-        <text class="hint-text">体验账号：demo</text>
-        <text class="hint-text">密码：1234</text>
-      </view>
-
-      <view class="block">
-        <text class="k">用户名</text>
-        <input v-model="username" class="wx-input" placeholder="请输入用户名" placeholder-class="ph" />
-      </view>
-
-      <view class="block">
-        <text class="k">密码</text>
-        <input v-model="password" class="wx-input" password placeholder="请输入密码" placeholder-class="ph" />
-      </view>
-
-      <button class="wx-btn-primary" @click="submit">
-        <view class="btn-inner">
-          <uni-icons type="checkbox-filled" size="18" color="#ffffff" />
-          <text>登录</text>
+    <view class="bg" />
+    <scroll-view scroll-y class="scroll">
+      <view class="content">
+        <view class="brand">
+          <view class="brand-icon">
+            <uni-icons type="list" size="20" color="#ffffff" />
+          </view>
+          <view class="brand-meta">
+            <text class="brand-title">校园失物招领助手</text>
+            <text class="brand-sub">登录后可发布与管理你的信息</text>
+          </view>
         </view>
-      </button>
 
-      <view class="footer">
-        <text class="link" @click="goRegister">没有账号？去注册</text>
+        <view class="card">
+          <text class="title">登录</text>
+          <text class="sub">本地账号，仅用于本机管理你发布的信息</text>
+          <view class="hint">
+            <text class="hint-text">体验账号：demo</text>
+            <text class="hint-text">密码：1234</text>
+          </view>
+
+          <view class="block">
+            <text class="k">用户名</text>
+            <input v-model="username" class="wx-input" placeholder="请输入用户名" placeholder-class="ph" />
+          </view>
+
+          <view class="block">
+            <text class="k">密码</text>
+            <input v-model="password" class="wx-input" password placeholder="请输入密码" placeholder-class="ph" />
+          </view>
+
+          <button class="wx-btn-primary" @click="submit">
+            <view class="btn-inner">
+              <uni-icons type="checkbox-filled" size="18" color="#ffffff" />
+              <text>登录</text>
+            </view>
+          </button>
+
+          <view class="footer">
+            <text class="link" @click="goRegister">没有账号？去注册</text>
+          </view>
+        </view>
+
+        <view class="legal">
+          <text class="legal-text">本项目为毕业设计演示，数据仅保存在本机，请勿填写真实隐私信息。</text>
+        </view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 </template>
 
@@ -56,7 +75,67 @@ function goRegister() {
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding: 18rpx 24rpx calc(24rpx + var(--safe-bottom));
+  position: relative;
+  padding: 18rpx var(--pad) calc(24rpx + var(--safe-bottom));
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200rpx 820rpx at 16% 0%, rgba(47, 107, 255, 0.16), transparent 58%),
+    radial-gradient(920rpx 740rpx at 96% 18%, rgba(124, 58, 237, 0.12), transparent 62%),
+    linear-gradient(180deg, #f7f8ff, #f5f6fa 52%, #f5f6fa);
+}
+
+.scroll {
+  position: relative;
+  height: 100vh;
+}
+
+.content {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18rpx;
+  padding: 18rpx 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  padding: 0 6rpx;
+}
+
+.brand-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 22rpx;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18rpx 44rpx rgba(47, 107, 255, 0.22);
+}
+
+.brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.brand-title {
+  font-size: 32rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.brand-sub {
+  font-size: 22rpx;
+  color: rgba(100, 116, 139, 0.92);
+  font-weight: 800;
 }
 
 .card {
@@ -64,7 +143,7 @@ function goRegister() {
   border-radius: var(--radius-lg);
   padding: 28rpx;
   border: 1px solid var(--border-soft);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow);
 }
 
 .title {
@@ -145,5 +224,18 @@ function goRegister() {
   font-size: 24rpx;
   color: var(--primary);
   font-weight: 900;
+}
+
+.legal {
+  padding: 0 6rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.legal-text {
+  text-align: center;
+  font-size: 20rpx;
+  color: rgba(100, 116, 139, 0.86);
+  line-height: 1.7;
 }
 </style>
