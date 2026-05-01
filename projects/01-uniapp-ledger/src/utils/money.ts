@@ -9,15 +9,21 @@ export function normalizeMoneyInput(input: string) {
   return intPart || "0"
 }
 
+export const MAX_ABS_CENTS = 999_999_999_999
+
 export function parseMoneyToCents(input: string) {
   const s = normalizeMoneyInput(input)
   if (!s) return 0
   const [i, f = ""] = s.split(".")
   const cents = Number.parseInt(i || "0", 10) * 100 + Number.parseInt((f + "00").slice(0, 2), 10)
-  return Number.isFinite(cents) ? cents : 0
+  if (!Number.isFinite(cents)) return 0
+  if (Math.abs(cents) > MAX_ABS_CENTS) return MAX_ABS_CENTS
+  return cents
 }
 
 export function formatCents(cents: number) {
+  if (!Number.isFinite(cents)) return "0.00"
+  if (Math.abs(cents) > MAX_ABS_CENTS) return `${Math.trunc(MAX_ABS_CENTS / 100)}.00+`
   const abs = Math.abs(cents)
   const sign = cents < 0 ? "-" : ""
   const i = Math.floor(abs / 100)
@@ -25,3 +31,6 @@ export function formatCents(cents: number) {
   return `${sign}${i}.${f}`
 }
 
+export function isValidCents(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value) && Number.isInteger(value) && Math.abs(value) <= MAX_ABS_CENTS
+}

@@ -4,6 +4,7 @@ import { createEmptyLedgerData } from "@/domain/defaults"
 import { loadLedgerData, saveLedgerData } from "@/repositories/ledgerStorage"
 import { parseISOToDateKey, toMonthKey } from "@/utils/date"
 import { createId } from "@/utils/id"
+import { isValidCents, MAX_ABS_CENTS } from "@/utils/money"
 
 type CreateTxnInput = {
   type: TxnType
@@ -20,6 +21,14 @@ type UpdateTxnPatch = Partial<Omit<Transaction, "id" | "createdAt">>
 const state = reactive<{ data: LedgerData }>({
   data: loadLedgerData(),
 })
+
+function normalizeOccurredAt(input: string) {
+  const d = new Date(input)
+  if (Number.isNaN(d.getTime())) return new Date().toISOString()
+  const y = d.getFullYear()
+  if (y < 2000 || y > 2100) return new Date().toISOString()
+  return d.toISOString()
+}
 
 function persist() {
   saveLedgerData(state.data)
@@ -44,6 +53,13 @@ function recalcAccountBalances() {
 
 function ensureInitialized() {
   if (!state.data || typeof state.data.version !== "number") state.data = createEmptyLedgerData()
+  state.data.transactions = (state.data.transactions || [])
+    .map((t) => ({
+      ...t,
+      amountCents: typeof t.amountCents === "number" ? Math.min(Math.max(0, Math.trunc(t.amountCents)), MAX_ABS_CENTS) : 0,
+      occurredAt: normalizeOccurredAt(String(t.occurredAt || "")),
+    }))
+    .filter((t) => isValidCents(t.amountCents) && t.amountCents > 0)
   normalize()
   recalcAccountBalances()
   persist()
@@ -63,12 +79,15 @@ export function useLedgerStore() {
   const recentTransactions = computed(() => state.data.transactions.slice(0, 20))
 
   function createTransaction(input: CreateTxnInput) {
+    if (!isValidCents(input.amountCents) || input.amountCents <= 0) return ""
     const now = new Date().toISOString()
     const txn: Transaction = {
       id: createId("txn"),
       createdAt: now,
       updatedAt: now,
       ...input,
+      amountCents: Math.min(input.amountCents, MAX_ABS_CENTS),
+      occurredAt: normalizeOccurredAt(input.occurredAt),
     }
     state.data.transactions.unshift(txn)
     normalize()
@@ -81,6 +100,7 @@ export function useLedgerStore() {
     const idx = state.data.transactions.findIndex((t) => t.id === id)
     if (idx < 0) return false
     const prev = state.data.transactions[idx]
+    if (typeof patch.amountCents !== "undefined" && (!isValidCents(patch.amountCents) || patch.amountCents <= 0)) return false
     const next: Transaction = {
       ...prev,
       ...patch,
@@ -88,6 +108,9 @@ export function useLedgerStore() {
       createdAt: prev.createdAt,
       updatedAt: new Date().toISOString(),
     }
+    if (typeof next.amountCents !== "number" || !Number.isFinite(next.amountCents) || next.amountCents <= 0) return false
+    next.amountCents = Math.min(Math.trunc(next.amountCents), MAX_ABS_CENTS)
+    next.occurredAt = normalizeOccurredAt(next.occurredAt)
     state.data.transactions.splice(idx, 1, next)
     normalize()
     recalcAccountBalances()
@@ -146,7 +169,10 @@ export function useLedgerStore() {
   function setMonthlyBudget(month: string, totalCents?: number) {
     const idx = state.data.budgets.findIndex((b) => b.month === month)
     const next: Budget = idx >= 0 ? { ...state.data.budgets[idx] } : { id: createId("budget"), month }
-    if (typeof totalCents === "number") next.totalCents = totalCents
+    if (typeof totalCents === "number") {
+      if (!Number.isFinite(totalCents) || totalCents < 0) return
+      next.totalCents = Math.min(Math.trunc(totalCents), MAX_ABS_CENTS)
+    }
     else delete next.totalCents
     if (idx >= 0) state.data.budgets.splice(idx, 1, next)
     else state.data.budgets.push(next)
@@ -211,4 +237,3 @@ export function useLedgerStore() {
     groupTxnsByDate,
   }
 }
-
