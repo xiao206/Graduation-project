@@ -82,32 +82,32 @@
       {
         "pagePath": "pages/home/index",
         "text": "首页",
-        "iconPath": "static/tabbar/home.svg",
-        "selectedIconPath": "static/tabbar/home-active.svg"
+        "iconPath": "static/tabbar/home-v2.svg",
+        "selectedIconPath": "static/tabbar/home-active-v2.svg"
       },
       {
         "pagePath": "pages/bills/index",
         "text": "账单",
-        "iconPath": "static/tabbar/receipt.svg",
-        "selectedIconPath": "static/tabbar/receipt-active.svg"
+        "iconPath": "static/tabbar/receipt-v2.svg",
+        "selectedIconPath": "static/tabbar/receipt-active-v2.svg"
       },
       {
         "pagePath": "pages/add/index",
         "text": "记账",
-        "iconPath": "static/tabbar/plus.svg",
-        "selectedIconPath": "static/tabbar/plus-active.svg"
+        "iconPath": "static/tabbar/plus-v2.svg",
+        "selectedIconPath": "static/tabbar/plus-active-v2.svg"
       },
       {
         "pagePath": "pages/stats/index",
         "text": "统计",
-        "iconPath": "static/tabbar/chart.svg",
-        "selectedIconPath": "static/tabbar/chart-active.svg"
+        "iconPath": "static/tabbar/chart-v2.svg",
+        "selectedIconPath": "static/tabbar/chart-active-v2.svg"
       },
       {
         "pagePath": "pages/settings/index",
         "text": "设置",
-        "iconPath": "static/tabbar/settings.svg",
-        "selectedIconPath": "static/tabbar/settings-active.svg"
+        "iconPath": "static/tabbar/settings-v2.svg",
+        "selectedIconPath": "static/tabbar/settings-active-v2.svg"
       }
     ]
   }
