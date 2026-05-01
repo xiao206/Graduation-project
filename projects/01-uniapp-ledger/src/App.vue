@@ -16,6 +16,8 @@ page {
   --radius-lg: 22rpx;
   --primary: #111827;
   --primary-ghost: rgba(15, 23, 42, 0.06);
+  --tabbar: 120rpx;
+  --safe-bottom: env(safe-area-inset-bottom);
 
   background: var(--bg);
   color: var(--text);

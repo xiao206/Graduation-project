@@ -40,7 +40,7 @@
           </view>
         </view>
       </view>
-      <view style="height: 60rpx" />
+      <view style="height: 220rpx" />
     </scroll-view>
   </view>
 </template>

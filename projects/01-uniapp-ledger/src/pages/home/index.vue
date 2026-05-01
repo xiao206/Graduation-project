@@ -67,6 +67,9 @@
       </view>
     </view>
 
+    <view class="floating">
+      <button class="fab" @click="goAdd">记一笔</button>
+    </view>
   </view>
 </template>
 
@@ -365,4 +368,22 @@ function goAssets() {
   font-weight: 800;
 }
 
+.floating {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(24rpx + var(--tabbar) + var(--safe-bottom));
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.fab {
+  pointer-events: auto;
+  width: 340rpx;
+  background: #111827;
+  color: #ffffff;
+  border-radius: 999rpx;
+  box-shadow: 0 22rpx 60rpx rgba(17, 24, 39, 0.3);
+}
 </style>
