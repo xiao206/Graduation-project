@@ -88,4 +88,29 @@ textarea {
   border: 1px solid var(--border);
   font-weight: 900;
 }
+
+@media screen and (min-width: 520px) {
+  body {
+    background: #e9eef7;
+  }
+
+  #app {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 0;
+  }
+
+  uni-app {
+    width: 430px;
+    max-width: 92vw;
+    min-height: calc(100vh - 48px);
+    background: var(--bg);
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+  }
+}
 </style>

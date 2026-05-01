@@ -100,6 +100,103 @@ function ensureInitialized() {
   const userIdSet = new Set(state.data.users.map((u) => u.id))
   if (state.data.settings.currentUserId && !userIdSet.has(state.data.settings.currentUserId)) state.data.settings.currentUserId = undefined
 
+  const hasDemoUser = state.data.users.some((u) => u.id === "u_demo")
+  const hasDemoItems = state.data.items.some((x) => x.ownerUserId === "u_demo")
+  if (!hasDemoUser || !hasDemoItems) {
+    const now = new Date()
+    const demoUser: LFUser = hasDemoUser
+      ? (state.data.users.find((u) => u.id === "u_demo") as LFUser)
+      : {
+          id: "u_demo",
+          username: "demo",
+          passwordHash: hashPassword("demo", "1234"),
+          createdAt: now.toISOString(),
+        }
+
+    if (!hasDemoUser) state.data.users.push(demoUser)
+
+    if (!hasDemoItems) {
+      const daysAgo = (n: number) => new Date(now.getTime() - n * 24 * 60 * 60 * 1000)
+      const atNoon = (d: Date) => new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 12, 0, 0)).toISOString()
+      const t = (d: Date) => d.toISOString()
+
+      const demoItems: LFItem[] = [
+      {
+        id: createId("item"),
+        type: "lost",
+        title: "校园卡",
+        description: "姓名：张同学，卡面磨损较明显。捡到的同学麻烦联系我，谢谢！",
+        categoryId: "card",
+        location: "一食堂",
+        occurredAt: atNoon(daysAgo(0)),
+        contact: "微信：demo_aa",
+        status: "open",
+        ownerUserId: demoUser.id,
+        createdAt: t(daysAgo(0)),
+        updatedAt: t(daysAgo(0)),
+      },
+      {
+        id: createId("item"),
+        type: "found",
+        title: "钥匙串（黑色挂绳）",
+        description: "在图书馆门口台阶捡到，挂绳上有小熊挂件。",
+        categoryId: "key",
+        location: "图书馆门口",
+        occurredAt: atNoon(daysAgo(1)),
+        contact: "QQ：12345678",
+        status: "open",
+        ownerUserId: demoUser.id,
+        createdAt: t(daysAgo(1)),
+        updatedAt: t(daysAgo(1)),
+      },
+      {
+        id: createId("item"),
+        type: "lost",
+        title: "AirPods 耳机",
+        description: "白色，充电盒有贴纸。大概率在操场附近掉的。",
+        categoryId: "electronic",
+        location: "操场跑道",
+        occurredAt: atNoon(daysAgo(2)),
+        contact: undefined,
+        status: "open",
+        ownerUserId: demoUser.id,
+        createdAt: t(daysAgo(2)),
+        updatedAt: t(daysAgo(2)),
+      },
+      {
+        id: createId("item"),
+        type: "found",
+        title: "高数教材",
+        description: "封面写了名字缩写，暂时放在二教保安室。",
+        categoryId: "book",
+        location: "二教 1 楼",
+        occurredAt: atNoon(daysAgo(3)),
+        contact: "电话：188****0000",
+        status: "claimed",
+        ownerUserId: demoUser.id,
+        createdAt: t(daysAgo(3)),
+        updatedAt: t(daysAgo(1)),
+      },
+      {
+        id: createId("item"),
+        type: "lost",
+        title: "蓝色外套",
+        description: "深蓝运动外套，袖口有白色条纹。",
+        categoryId: "clothes",
+        location: "宿舍楼下快递点",
+        occurredAt: atNoon(daysAgo(4)),
+        contact: "微信：demo_aa",
+        status: "closed",
+        ownerUserId: demoUser.id,
+        createdAt: t(daysAgo(4)),
+        updatedAt: t(daysAgo(0)),
+      },
+      ]
+
+      state.data.items.push(...demoItems)
+    }
+  }
+
   normalize()
   persist()
 }

@@ -3,6 +3,10 @@
     <view class="card">
       <text class="title">登录</text>
       <text class="sub">本地账号，仅用于本机管理你发布的信息</text>
+      <view class="hint">
+        <text class="hint-text">体验账号：demo</text>
+        <text class="hint-text">密码：1234</text>
+      </view>
 
       <view class="block">
         <text class="k">用户名</text>
@@ -77,6 +81,23 @@ function goRegister() {
   line-height: 1.7;
 }
 
+.hint {
+  margin-top: 12rpx;
+  padding: 12rpx 14rpx;
+  border-radius: 18rpx;
+  background: rgba(47, 107, 255, 0.08);
+  border: 1px solid rgba(47, 107, 255, 0.14);
+  display: flex;
+  gap: 14rpx;
+  flex-wrap: wrap;
+}
+
+.hint-text {
+  font-size: 22rpx;
+  color: rgba(15, 23, 42, 0.76);
+  font-weight: 900;
+}
+
 .block {
   margin-top: 14rpx;
   display: flex;
@@ -136,4 +157,3 @@ function goRegister() {
   font-weight: 900;
 }
 </style>
-
