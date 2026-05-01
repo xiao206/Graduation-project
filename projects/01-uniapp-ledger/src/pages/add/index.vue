@@ -42,7 +42,7 @@
           @click="categoryId = c.id"
         >
           <view class="cat-icon" :style="{ backgroundColor: c.color || '#E5E7EB' }">
-            <text class="cat-icon-text">{{ c.icon || "🧾" }}</text>
+            <uni-icons :type="c.icon || 'more-filled'" size="22" color="#FFFFFF" />
           </view>
           <text class="cat-name">{{ c.name }}</text>
         </view>

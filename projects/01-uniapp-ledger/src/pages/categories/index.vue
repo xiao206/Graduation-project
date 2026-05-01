@@ -13,7 +13,7 @@
       <text class="title">新增分类</text>
       <view class="form">
         <input v-model="name" class="input" placeholder="分类名称" placeholder-class="ph" />
-        <input v-model="icon" class="input" placeholder="图标（可填 emoji）" placeholder-class="ph" />
+        <input v-model="icon" class="input" placeholder="图标 type（例如 wallet-filled）" placeholder-class="ph" />
         <view class="colors">
           <view v-for="c in colors" :key="c" class="color" :class="color === c ? 'color-active' : ''" :style="{ backgroundColor: c }" @click="color = c" />
         </view>
@@ -27,7 +27,7 @@
         <view v-for="c in list" :key="c.id" class="row">
           <view class="left">
             <view class="icon" :style="{ backgroundColor: c.color || '#E5E7EB' }">
-              <text class="icon-text">{{ c.icon || "🧾" }}</text>
+              <uni-icons :type="c.icon || 'more-filled'" size="20" color="#FFFFFF" />
             </view>
             <view class="meta">
               <text class="row-name">{{ c.name }}</text>

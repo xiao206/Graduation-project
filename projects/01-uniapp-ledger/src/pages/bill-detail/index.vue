@@ -8,7 +8,7 @@
     <view v-else class="card">
       <view class="top">
         <view class="icon" :style="{ backgroundColor: category?.color || '#E5E7EB' }">
-          <text class="icon-text">{{ category?.icon || "🧾" }}</text>
+          <uni-icons :type="category?.icon || 'more-filled'" size="22" color="#FFFFFF" />
         </view>
         <view class="meta">
           <text class="name">{{ category?.name || "未分类" }}</text>
@@ -231,4 +231,3 @@ onLoad((q: any) => {
   border-radius: 18rpx;
 }
 </style>
-

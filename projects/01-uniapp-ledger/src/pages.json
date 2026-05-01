@@ -67,6 +67,12 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F6F7FB"
   },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
   "tabBar": {
     "color": "#64748B",
     "selectedColor": "#111827",

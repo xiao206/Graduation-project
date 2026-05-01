@@ -26,7 +26,7 @@
           <view v-for="t in g.items" :key="t.id" class="item" @click="goDetail(t.id)">
             <view class="left">
               <view class="icon" :style="{ backgroundColor: categoryMap.get(t.categoryId)?.color || '#E5E7EB' }">
-                <text class="icon-text">{{ categoryMap.get(t.categoryId)?.icon || "🧾" }}</text>
+                <uni-icons :type="categoryMap.get(t.categoryId)?.icon || 'more-filled'" size="20" color="#FFFFFF" />
               </view>
               <view class="meta">
                 <text class="name">{{ categoryMap.get(t.categoryId)?.name || "未分类" }}</text>
@@ -281,4 +281,3 @@ function goAdd() {
   border-radius: 18rpx;
 }
 </style>
-
