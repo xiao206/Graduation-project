@@ -19,10 +19,16 @@
 
 1. 复制 `projects/_template` 为 `projects/NN-项目短名`（例如 `projects/01-web-demo`）
 2. 完善该项目下的 `README.md`（目标、技术栈、启动方式、截图/演示链接等）
-3. 在 [projects/README.md](file:///workspace/projects/README.md) 里把项目登记到清单
+3. 在 [projects/README.md](file:///workspace/projects/README.md) 里把项目登记到清单（推荐同时附上截图路径）
 
 ## 基本约定
 
 - 不提交任何密钥/账号信息：使用 `.env`，并确保被忽略
 - 大文件/数据集不要直接进 Git：放在 `data/` 并遵循其中说明（必要时再用 Git LFS）
 - 每个项目尽量做到可复现：写清楚安装、启动、构建与运行环境要求
+
+## 快速导航
+
+- 项目清单与约定：[projects/README.md](file:///workspace/projects/README.md)
+- 论文/报告索引：[docs/README.md](file:///workspace/docs/README.md)
+- 数据/素材说明：[data/README.md](file:///workspace/data/README.md)

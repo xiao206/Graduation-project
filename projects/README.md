@@ -3,6 +3,7 @@
 ## 项目清单
 
 - 01｜记账小程序｜UniApp(Vue3)+TS｜[projects/01-uniapp-ledger](file:///workspace/projects/01-uniapp-ledger/README.md)
+- 02｜宿舍AA分摊助手｜UniApp(Vue3)+TS｜[projects/02-uniapp-aa-split](file:///workspace/projects/02-uniapp-aa-split/README.md)
 
 ## 命名建议
 
