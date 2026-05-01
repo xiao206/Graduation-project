@@ -18,7 +18,7 @@
         <view class="row" @click="go('/pages/categories/index')">
           <view class="row-left">
             <view class="row-icon">
-              <uni-icons type="list-filled" size="18" color="#0F172A" />
+              <uni-icons type="list" size="18" color="#0F172A" />
             </view>
             <view class="row-meta">
               <text class="row-text">分类管理</text>
