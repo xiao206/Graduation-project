@@ -129,11 +129,10 @@ function goDetail() {
 
 .range-toggle {
   margin-top: 14rpx;
-  background: var(--card);
+  background: var(--chip);
   border-radius: 999rpx;
   display: flex;
   padding: 6rpx;
-  border: 1px solid var(--border);
 }
 
 .seg {
@@ -146,7 +145,7 @@ function goDetail() {
 }
 
 .seg-active {
-  background: var(--primary-ghost);
+  background: var(--card);
 }
 
 .seg-text {
@@ -171,8 +170,8 @@ function goDetail() {
 .picker {
   height: 76rpx;
   padding: 0 16rpx;
-  background: var(--primary-ghost);
-  border-radius: var(--radius);
+  background: var(--surface);
+  border-radius: 18rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -188,10 +187,11 @@ function goDetail() {
 
 .primary {
   margin-top: 16rpx;
-  height: 84rpx;
-  border-radius: var(--radius);
+  height: 90rpx;
+  border-radius: 999rpx;
   background: var(--primary);
   color: #ffffff;
   font-weight: 900;
+  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
 }
 </style>

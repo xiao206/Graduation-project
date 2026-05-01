@@ -168,25 +168,11 @@ function onSwitch(id: string, e: any) {
 .icon {
   width: 72rpx;
   height: 72rpx;
-  border-radius: 20rpx;
+  border-radius: 999rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-}
-
-.icon::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.12));
-}
-
-.icon > * {
-  position: relative;
-  z-index: 1;
+  border: 1px solid var(--border);
 }
 
 .icon-text {

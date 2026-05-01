@@ -6,7 +6,7 @@
         <view class="row" @click="go('/pages/members/index')">
           <view class="row-left">
             <view class="row-icon">
-              <uni-icons type="person-filled" size="18" color="#0F172A" />
+              <uni-icons type="person-filled" size="18" color="var(--primary)" />
             </view>
             <view class="row-meta">
               <text class="row-text">成员管理</text>
@@ -18,7 +18,7 @@
         <view class="row" @click="go('/pages/categories/index')">
           <view class="row-left">
             <view class="row-icon">
-              <uni-icons type="list" size="18" color="#0F172A" />
+              <uni-icons type="list" size="18" color="var(--primary)" />
             </view>
             <view class="row-meta">
               <text class="row-text">分类管理</text>
@@ -30,7 +30,7 @@
         <view class="row" @click="go('/pages/data/index')">
           <view class="row-left">
             <view class="row-icon">
-              <uni-icons type="download" size="18" color="#0F172A" />
+              <uni-icons type="download" size="18" color="var(--primary)" />
             </view>
             <view class="row-meta">
               <text class="row-text">数据</text>
@@ -42,7 +42,7 @@
         <view class="row" @click="go('/pages/about/index')">
           <view class="row-left">
             <view class="row-icon">
-              <uni-icons type="info-filled" size="18" color="#0F172A" />
+              <uni-icons type="info-filled" size="18" color="var(--primary)" />
             </view>
             <view class="row-meta">
               <text class="row-text">关于</text>
@@ -91,7 +91,7 @@ function go(url: string) {
 
 .row {
   padding: 18rpx 4rpx;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -110,8 +110,9 @@ function go(url: string) {
 .row-icon {
   width: 64rpx;
   height: 64rpx;
-  border-radius: var(--radius);
-  background: var(--primary-ghost);
+  border-radius: 18rpx;
+  background: var(--surface);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;

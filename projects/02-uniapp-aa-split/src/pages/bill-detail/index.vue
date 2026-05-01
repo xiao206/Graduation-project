@@ -8,9 +8,7 @@
     <view v-else class="wrap">
       <view class="hero">
         <view class="top">
-          <view class="icon" :style="{ backgroundColor: category?.color || '#E5E7EB' }">
-            <uni-icons :type="category?.icon || 'more-filled'" size="28" color="#FFFFFF" />
-          </view>
+          <view class="dot" :style="{ backgroundColor: category?.color || '#D1D5DB' }" />
           <view class="meta">
             <text class="name">{{ category?.name || "未分类" }}</text>
             <text class="sub">{{ occurredAtText }} · {{ payerName }} · {{ bill.participantIds.length }}人</text>
@@ -215,28 +213,10 @@ onLoad((q: any) => {
   gap: 14rpx;
 }
 
-.icon {
-  width: 92rpx;
-  height: 92rpx;
-  border-radius: 26rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-}
-
-.icon::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.12));
-}
-
-.icon > * {
-  position: relative;
-  z-index: 1;
+.dot {
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 999rpx;
 }
 
 .meta {
@@ -259,8 +239,8 @@ onLoad((q: any) => {
 .amount-box {
   margin-top: 18rpx;
   padding: 18rpx 18rpx;
-  background: var(--primary-ghost);
-  border-radius: var(--radius);
+  background: var(--surface);
+  border-radius: 18rpx;
   border: 1px solid var(--border);
   display: flex;
   align-items: baseline;
@@ -335,7 +315,7 @@ onLoad((q: any) => {
   right: 0;
   bottom: 0;
   padding: 12rpx 24rpx calc(12rpx + env(safe-area-inset-bottom));
-  background: rgba(247, 248, 250, 0.92);
+  background: rgba(242, 244, 247, 0.92);
   border-top: 1px solid var(--border);
   display: flex;
   gap: 12rpx;
@@ -352,16 +332,16 @@ onLoad((q: any) => {
 
 .ghost {
   background: var(--card);
-  border-radius: var(--radius);
+  border-radius: 999rpx;
   color: var(--text);
   border: 1px solid var(--border);
 }
 
 .danger {
   background: rgba(239, 68, 68, 0.12);
-  border-radius: var(--radius);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 999rpx;
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.22);
 }
 
 .empty {
@@ -384,6 +364,6 @@ onLoad((q: any) => {
 .primary {
   background: var(--primary);
   color: #ffffff;
-  border-radius: var(--radius);
+  border-radius: 999rpx;
 }
 </style>

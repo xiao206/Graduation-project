@@ -3,69 +3,73 @@
     <view class="card">
       <text class="title">{{ isEdit ? "编辑账单" : "新增账单" }}</text>
 
-      <view class="form">
-        <view class="field">
-          <text class="k">金额</text>
-          <input v-model="amountYuan" class="input" type="digit" placeholder="例如 12.5" placeholder-class="ph" />
-        </view>
+      <view class="amount">
+        <text class="amount-prefix">¥</text>
+        <input v-model="amountYuan" class="amount-input" type="digit" placeholder="0.00" placeholder-class="ph-amount" />
+      </view>
 
-        <view class="field">
-          <text class="k">分类</text>
-          <picker :range="categoryNames" :value="categoryIndex" @change="onPickCategory">
-            <view class="picker">
-              <text class="picker-text">{{ currentCategoryName }}</text>
-              <uni-icons type="forward" size="16" color="#94A3B8" />
+      <view class="group">
+        <picker :range="categoryNames" :value="categoryIndex" @change="onPickCategory">
+          <view class="cell">
+            <text class="cell-k">分类</text>
+            <view class="cell-v">
+              <text class="cell-v-text">{{ currentCategoryName }}</text>
+              <uni-icons type="forward" size="16" color="var(--muted)" />
             </view>
-          </picker>
-        </view>
+          </view>
+        </picker>
 
-        <view class="field">
-          <text class="k">付款人</text>
-          <picker :range="memberNames" :value="payerIndex" @change="onPickPayer">
-            <view class="picker">
-              <text class="picker-text">{{ currentPayerName }}</text>
-              <uni-icons type="forward" size="16" color="#94A3B8" />
+        <picker :range="memberNames" :value="payerIndex" @change="onPickPayer">
+          <view class="cell">
+            <text class="cell-k">付款人</text>
+            <view class="cell-v">
+              <text class="cell-v-text">{{ currentPayerName }}</text>
+              <uni-icons type="forward" size="16" color="var(--muted)" />
             </view>
-          </picker>
-        </view>
+          </view>
+        </picker>
 
-        <view class="field">
-          <text class="k">参与人</text>
-          <view class="participants">
-            <view class="actions">
-              <button class="ghost" size="mini" @click="selectAll">全选</button>
-              <button class="ghost" size="mini" @click="selectNone">清空</button>
+        <picker mode="date" :value="dateValue" @change="onPickDate">
+          <view class="cell cell-last">
+            <text class="cell-k">发生日期</text>
+            <view class="cell-v">
+              <text class="cell-v-text">{{ dateValue }}</text>
+              <uni-icons type="forward" size="16" color="var(--muted)" />
             </view>
-            <checkbox-group @change="onPickParticipants">
-              <view class="grid">
-                <label v-for="m in members" :key="m.id" class="check">
-                  <checkbox :value="m.id" :checked="participantIds.includes(m.id)" />
-                  <text class="check-text">{{ m.name }}</text>
-                </label>
-              </view>
-            </checkbox-group>
+          </view>
+        </picker>
+      </view>
+
+      <view class="group">
+        <view class="cell">
+          <text class="cell-k">参与人</text>
+          <view class="cell-v">
+            <view class="mini-actions">
+              <view class="mini" @click="selectAll">全选</view>
+              <view class="mini" @click="selectNone">清空</view>
+            </view>
           </view>
         </view>
+        <checkbox-group @change="onPickParticipants">
+          <view class="chips">
+            <label v-for="m in members" :key="m.id" class="chip">
+              <checkbox :value="m.id" :checked="participantIds.includes(m.id)" />
+              <text class="chip-t">{{ m.name }}</text>
+            </label>
+          </view>
+        </checkbox-group>
+      </view>
 
-        <view class="field">
-          <text class="k">发生日期</text>
-          <picker mode="date" :value="dateValue" @change="onPickDate">
-            <view class="picker">
-              <text class="picker-text">{{ dateValue }}</text>
-              <uni-icons type="forward" size="16" color="#94A3B8" />
-            </view>
-          </picker>
-        </view>
-
-        <view class="field">
-          <text class="k">备注</text>
-          <input v-model="note" class="input" placeholder="可选：例如 水费/聚餐" placeholder-class="ph" />
-        </view>
-
-        <view class="btns">
-          <button class="primary" @click="save">{{ isEdit ? "保存修改" : "保存" }}</button>
+      <view class="group">
+        <view class="cell cell-last">
+          <text class="cell-k">备注</text>
+          <input v-model="note" class="note" placeholder="可选：例如 水费/聚餐" placeholder-class="ph" />
         </view>
       </view>
+    </view>
+
+    <view class="bottom">
+      <button class="primary" @click="save">{{ isEdit ? "保存修改" : "保存" }}</button>
     </view>
   </view>
 </template>
@@ -190,7 +194,7 @@ onLoad((q: any) => {
 .page {
   min-height: 100vh;
   background: var(--bg);
-  padding: 18rpx 24rpx 24rpx;
+  padding: 18rpx 24rpx calc(28rpx + 120rpx + env(safe-area-inset-bottom));
 }
 
 .card {
@@ -207,105 +211,140 @@ onLoad((q: any) => {
   color: var(--text);
 }
 
-.form {
+.amount {
   margin-top: 14rpx;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18rpx 18rpx;
   display: flex;
-  flex-direction: column;
-  gap: 12rpx;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
+  align-items: baseline;
   gap: 10rpx;
 }
 
-.k {
+.amount-prefix {
+  font-size: 30rpx;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.amount-input {
+  flex: 1;
+  font-size: 56rpx;
+  font-weight: 900;
+  color: var(--text);
+  height: 74rpx;
+  line-height: 74rpx;
+}
+
+.ph-amount {
+  color: rgba(107, 114, 128, 0.55);
+}
+
+.group {
+  margin-top: 14rpx;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cell {
+  padding: 18rpx 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+  border-bottom: 1px solid var(--border);
+}
+
+.cell-last {
+  border-bottom: none;
+}
+
+.cell-k {
   font-size: 24rpx;
   color: var(--muted);
   font-weight: 800;
 }
 
-.input {
-  height: 76rpx;
-  padding: 0 16rpx;
-  background: var(--primary-ghost);
-  border-radius: var(--radius);
-  font-size: 26rpx;
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-.picker {
-  height: 76rpx;
-  padding: 0 16rpx;
-  background: var(--primary-ghost);
-  border-radius: var(--radius);
+.cell-v {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 12rpx;
-  border: 1px solid var(--border);
 }
 
-.picker-text {
+.cell-v-text {
   font-size: 26rpx;
   color: var(--text);
+  font-weight: 900;
+}
+
+.mini-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.mini {
+  padding: 8rpx 12rpx;
+  border-radius: 999rpx;
+  background: var(--chip);
+  font-size: 22rpx;
+  color: var(--muted);
   font-weight: 800;
 }
 
-.participants {
-  padding: 14rpx 16rpx;
-  background: var(--primary-ghost);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-}
-
-.actions {
-  display: flex;
-  gap: 12rpx;
-  margin-bottom: 10rpx;
-}
-
-.ghost {
-  background: var(--card);
-  color: var(--text);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-}
-
-.grid {
+.chips {
+  padding: 12rpx 18rpx 18rpx;
   display: flex;
   flex-wrap: wrap;
-  gap: 10rpx 20rpx;
+  gap: 10rpx 14rpx;
 }
 
-.check {
+.chip {
+  padding: 10rpx 12rpx;
+  border-radius: 999rpx;
+  background: var(--chip);
   display: flex;
   align-items: center;
   gap: 8rpx;
 }
 
-.check-text {
+.chip-t {
   font-size: 24rpx;
   color: var(--text);
   font-weight: 800;
 }
 
-.btns {
-  margin-top: 10rpx;
-}
-
-.primary {
-  background: var(--primary);
-  color: #ffffff;
-  border-radius: var(--radius);
-  height: 84rpx;
+.note {
+  flex: 1;
+  text-align: right;
+  font-size: 26rpx;
+  color: var(--text);
   font-weight: 900;
 }
 
+.bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 14rpx 24rpx calc(14rpx + env(safe-area-inset-bottom));
+  background: rgba(242, 244, 247, 0.92);
+  border-top: 1px solid var(--border);
+}
+
+.primary {
+  height: 90rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 900;
+  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+}
+
 .ph {
-  color: #94a3b8;
+  color: rgba(107, 114, 128, 0.7);
 }
 </style>
-

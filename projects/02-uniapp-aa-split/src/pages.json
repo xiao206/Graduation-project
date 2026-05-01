@@ -70,8 +70,8 @@
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "宿舍AA分摊助手",
-    "navigationBarBackgroundColor": "#FAF6ED",
-    "backgroundColor": "#FAF6ED"
+    "navigationBarBackgroundColor": "#F2F4F7",
+    "backgroundColor": "#F2F4F7"
   },
   "easycom": {
     "autoscan": true,
@@ -80,9 +80,9 @@
     }
   },
   "tabBar": {
-    "color": "#7A6756",
-    "selectedColor": "#0F766E",
-    "backgroundColor": "#FFFDF7",
+    "color": "#6B7280",
+    "selectedColor": "#2563EB",
+    "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "list": [
       {

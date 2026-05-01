@@ -1,13 +1,22 @@
 <template>
   <view class="page">
     <view class="toolbar">
-      <picker mode="date" fields="month" :value="monthKey + '-01'" @change="onPickMonth">
-        <view class="pill">
-          <text class="pill-text">{{ monthKey }}</text>
-          <text class="pill-sub">月份</text>
+      <view class="toolbar-top">
+        <picker mode="date" fields="month" :value="monthKey + '-01'" @change="onPickMonth">
+          <view class="chip">
+            <uni-icons type="calendar" size="14" color="var(--muted)" />
+            <text class="chip-text">{{ monthKey }}</text>
+            <uni-icons type="down" size="12" color="var(--muted)" />
+          </view>
+        </picker>
+        <view class="add" @click="goAdd">
+          <uni-icons type="plus" size="18" color="#ffffff" />
         </view>
-      </picker>
-      <input v-model="keyword" class="search" placeholder="搜索备注/分类/成员" placeholder-class="ph" />
+      </view>
+      <view class="search-wrap">
+        <uni-icons type="search" size="16" color="var(--muted)" />
+        <input v-model="keyword" class="search" placeholder="搜索备注/分类/成员" placeholder-class="ph" />
+      </view>
     </view>
 
     <view v-if="groups.length === 0" class="empty">
@@ -20,29 +29,23 @@
       <view v-for="g in groups" :key="g.date" class="group">
         <view class="group-head">
           <text class="group-date">{{ g.date }}</text>
-          <text class="group-sum">合计 ¥{{ formatCents(g.total) }}</text>
+          <view class="group-chip">¥{{ formatCents(g.total) }}</view>
         </view>
         <view class="list">
-          <view v-for="b in g.items" :key="b.id" class="item" @click="goDetail(b.id)">
-            <view class="left">
-              <view class="icon" :style="{ backgroundColor: categoryMap.get(b.categoryId)?.color || '#E5E7EB' }">
-                <uni-icons :type="categoryMap.get(b.categoryId)?.icon || 'more-filled'" size="24" color="#FFFFFF" />
+          <view v-for="b in g.items" :key="b.id" class="cell" @click="goDetail(b.id)">
+            <view class="dot" :style="{ backgroundColor: categoryMap.get(b.categoryId)?.color || '#D1D5DB' }" />
+            <view class="cell-main">
+              <view class="cell-top">
+                <text class="cell-title">{{ categoryMap.get(b.categoryId)?.name || "未分类" }}</text>
+                <text class="cell-amount">¥{{ formatCents(b.amountCents) }}</text>
               </view>
-              <view class="meta">
-                <text class="name">{{ categoryMap.get(b.categoryId)?.name || "未分类" }}</text>
-                <text class="sub">{{ itemSub(b) }}</text>
-              </view>
+              <text class="cell-sub">{{ itemSub(b) }}</text>
             </view>
-            <text class="amt">¥{{ formatCents(b.amountCents) }}</text>
           </view>
         </view>
       </view>
       <view style="height: 60rpx" />
     </scroll-view>
-
-    <view class="floating">
-      <button class="fab" @click="goAdd">新增账单</button>
-    </view>
   </view>
 </template>
 
@@ -116,50 +119,71 @@ function goAdd() {
 }
 
 .toolbar {
-  padding: 18rpx 24rpx;
+  padding: 18rpx 24rpx 10rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.toolbar-top {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 14rpx;
 }
 
-.pill {
-  display: flex;
-  align-items: baseline;
+.chip {
+  display: inline-flex;
+  align-items: center;
   gap: 10rpx;
-  padding: 12rpx 16rpx;
-  background: var(--card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  padding: 10rpx 12rpx;
+  border-radius: 999rpx;
+  background: var(--chip);
 }
 
-.pill-text {
-  font-size: 26rpx;
-  font-weight: 800;
+.chip-text {
+  font-size: 24rpx;
   color: var(--text);
+  font-weight: 900;
 }
 
-.pill-sub {
-  font-size: 22rpx;
-  color: var(--muted);
+.add {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18rpx 44rpx rgba(37, 99, 235, 0.28);
+}
+
+.search-wrap {
+  height: 76rpx;
+  padding: 0 16rpx;
+  background: var(--card);
+  border-radius: 999rpx;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
 }
 
 .search {
   flex: 1;
-  height: 72rpx;
-  padding: 0 16rpx;
-  background: var(--card);
-  border-radius: var(--radius);
+  height: 76rpx;
+  padding: 0;
+  background: transparent;
   font-size: 26rpx;
   color: var(--text);
-  border: 1px solid var(--border);
 }
 
 .ph {
-  color: #94a3b8;
+  color: rgba(107, 114, 128, 0.7);
 }
 
 .scroll {
-  height: calc(100vh - 108rpx);
+  height: calc(100vh - 190rpx);
 }
 
 .group {
@@ -169,20 +193,24 @@ function goAdd() {
 .group-head {
   padding: 8rpx 6rpx 12rpx;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 14rpx;
 }
 
 .group-date {
   font-size: 26rpx;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--text);
 }
 
-.group-sum {
+.group-chip {
+  padding: 6rpx 10rpx;
+  border-radius: 999rpx;
+  background: var(--chip);
   font-size: 22rpx;
   color: var(--muted);
+  font-weight: 800;
 }
 
 .list {
@@ -190,75 +218,55 @@ function goAdd() {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
 }
 
-.item {
+.cell {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14rpx;
   padding: 18rpx 18rpx;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  border-bottom: 1px solid var(--border);
 }
 
-.item:last-child {
+.cell:last-child {
   border-bottom: none;
 }
 
-.left {
-  display: flex;
-  align-items: center;
-  gap: 14rpx;
+.dot {
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 999rpx;
+  margin-top: 10rpx;
 }
 
-.icon {
-  width: 72rpx;
-  height: 72rpx;
-  border-radius: 20rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-}
-
-.icon::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.12));
-}
-
-.icon > * {
-  position: relative;
-  z-index: 1;
-}
-
-.icon-text {
-  font-size: 34rpx;
-}
-
-.meta {
+.cell-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6rpx;
+  gap: 8rpx;
 }
 
-.name {
+.cell-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.cell-title {
   font-size: 28rpx;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--text);
 }
 
-.sub {
+.cell-sub {
   font-size: 22rpx;
   color: var(--muted);
 }
 
-.amt {
-  font-size: 30rpx;
-  font-weight: 800;
+.cell-amount {
+  font-size: 28rpx;
+  font-weight: 900;
   color: var(--text);
 }
 
@@ -271,7 +279,6 @@ function goAdd() {
   flex-direction: column;
   gap: 14rpx;
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
 }
 
 .empty-title {
@@ -289,30 +296,8 @@ function goAdd() {
   margin-top: 6rpx;
   background: var(--primary);
   color: #ffffff;
-  border-radius: var(--radius);
-}
-
-.floating {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 30rpx;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.fab {
-  pointer-events: auto;
-  width: 340rpx;
-  background: var(--primary);
-  color: #ffffff;
   border-radius: 999rpx;
-  height: 84rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 86rpx;
   font-weight: 900;
-  box-shadow: var(--shadow);
 }
 </style>
