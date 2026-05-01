@@ -47,6 +47,20 @@
         <text class="empty-sub">例如：午饭、地铁、水电费</text>
         <button class="primary-btn" @click="goAdd">记一笔</button>
       </view>
+      <view v-if="recent.length === 0" class="quick-card">
+        <view class="quick-head">
+          <text class="quick-title">快捷记账</text>
+          <text class="quick-sub">点一下直接带上分类</text>
+        </view>
+        <view class="quick-grid">
+          <view v-for="c in quickCategories" :key="c.id" class="quick" @click="goQuick(c.id)">
+            <view class="quick-ico" :style="{ backgroundColor: c.color || '#E5E7EB' }">
+              <uni-icons :type="c.icon || 'more-filled'" size="22" color="#FFFFFF" />
+            </view>
+            <text class="quick-text">{{ c.name }}</text>
+          </view>
+        </view>
+      </view>
       <view v-else class="list">
         <view v-for="t in recent" :key="t.id" class="txn" @click="goDetail(t.id)">
           <view class="txn-left">
@@ -67,7 +81,7 @@
       </view>
     </view>
 
-    <view class="floating">
+    <view v-if="recent.length > 0" class="floating">
       <button class="fab" @click="goAdd">记一笔</button>
     </view>
   </view>
@@ -112,6 +126,7 @@ const budgetRemainText = computed(() => {
 })
 
 const recent = computed(() => store.state.data.transactions.slice(0, 8))
+const quickCategories = computed(() => store.categoriesByType.value.expense.slice(0, 8))
 
 function txnSub(t: Transaction) {
   const date = parseISOToDateKey(t.occurredAt)
@@ -126,6 +141,11 @@ function onPickMonth(e: any) {
 }
 
 function goAdd() {
+  uni.switchTab({ url: "/pages/add/index" })
+}
+
+function goQuick(categoryId: string) {
+  uni.setStorageSync("gp:addPreset", JSON.stringify({ type: "expense", categoryId }))
   uni.switchTab({ url: "/pages/add/index" })
 }
 
@@ -238,7 +258,7 @@ function goAssets() {
 }
 
 .section {
-  padding: 12rpx 24rpx 160rpx;
+  padding: 12rpx 24rpx calc(24rpx + var(--tabbar) + var(--safe-bottom));
 }
 
 .section-title-row {
@@ -284,6 +304,87 @@ function goAssets() {
   background: var(--primary);
   color: #ffffff;
   border-radius: var(--radius);
+}
+
+.quick-card {
+  margin-top: 12rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 22rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.quick-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.quick-title {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.quick-sub {
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12rpx;
+}
+
+.quick {
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 18rpx;
+  padding: 12rpx 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.quick:active {
+  transform: scale(0.985);
+}
+
+.quick-ico {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.quick-ico::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.12));
+}
+
+.quick-ico > * {
+  position: relative;
+  z-index: 1;
+}
+
+.quick-text {
+  font-size: 22rpx;
+  color: var(--text);
+  font-weight: 800;
 }
 
 .list {

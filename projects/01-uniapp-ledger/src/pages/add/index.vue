@@ -78,6 +78,7 @@ import { normalizeMoneyInput, parseMoneyToCents } from "@/utils/money"
 
 const store = useLedgerStore()
 const PENDING_EDIT_KEY = "gp:pendingEditTxnId"
+const PRESET_KEY = "gp:addPreset"
 
 const mode = ref<"create" | "edit">("create")
 const editingId = ref<string>("")
@@ -224,7 +225,26 @@ onLoad((q: any) => {
 
 onShow(() => {
   const id = String(uni.getStorageSync(PENDING_EDIT_KEY) || "")
-  if (id) loadForEdit(id)
+  if (id) {
+    loadForEdit(id)
+    return
+  }
+  const presetRaw = String(uni.getStorageSync(PRESET_KEY) || "")
+  if (!presetRaw) return
+  try {
+    const preset = JSON.parse(presetRaw) as { type?: TxnType; categoryId?: string }
+    uni.removeStorageSync(PRESET_KEY)
+    clearForm()
+    if (preset.type && preset.type !== "transfer") type.value = preset.type
+    const all = [...store.categoriesByType.value.expense, ...store.categoriesByType.value.income]
+    const cat = preset.categoryId ? all.find((c) => c.id === preset.categoryId) : undefined
+    if (cat) {
+      type.value = cat.type === "income" ? "income" : "expense"
+      categoryId.value = cat.id
+    }
+  } catch {
+    uni.removeStorageSync(PRESET_KEY)
+  }
 })
 </script>
 
