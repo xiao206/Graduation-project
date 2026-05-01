@@ -59,6 +59,18 @@
       "style": {
         "navigationBarTitleText": "数据"
       }
+    },
+    {
+      "path": "pages/about/index",
+      "style": {
+        "navigationBarTitleText": "关于"
+      }
+    },
+    {
+      "path": "pages/feedback/index",
+      "style": {
+        "navigationBarTitleText": "问题反馈"
+      }
     }
   ],
   "globalStyle": {

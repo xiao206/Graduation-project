@@ -51,6 +51,30 @@
           </view>
           <uni-icons type="forward" size="16" color="#94A3B8" />
         </view>
+        <view class="row" @click="go('/pages/about/index')">
+          <view class="row-left">
+            <view class="row-icon">
+              <uni-icons type="info-filled" size="18" color="#0F172A" />
+            </view>
+            <view class="row-meta">
+              <text class="row-text">关于</text>
+              <text class="row-sub">版本信息</text>
+            </view>
+          </view>
+          <uni-icons type="forward" size="16" color="#94A3B8" />
+        </view>
+        <view class="row" @click="go('/pages/feedback/index')">
+          <view class="row-left">
+            <view class="row-icon">
+              <uni-icons type="chatboxes-filled" size="18" color="#0F172A" />
+            </view>
+            <view class="row-meta">
+              <text class="row-text">问题反馈</text>
+              <text class="row-sub">复制反馈内容</text>
+            </view>
+          </view>
+          <uni-icons type="forward" size="16" color="#94A3B8" />
+        </view>
       </view>
     </view>
   </view>
