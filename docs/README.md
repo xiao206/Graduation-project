@@ -6,6 +6,7 @@
 
 - [01-本地记账App](file:///workspace/docs/01-本地记账App)
 - [02-宿舍AA分摊助手](file:///workspace/docs/02-宿舍AA分摊助手)
+- [03-校园失物招领助手](file:///workspace/docs/03-校园失物招领助手)
 - [_templates](file:///workspace/docs/_templates)
 
 ## 命名建议
